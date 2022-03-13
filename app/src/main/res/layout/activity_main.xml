@@ -4,15 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/iuhnen1">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="136dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/neniuh1"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="358dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="28dp"
+        android:alpha="0.4"
+        android:background="@drawable/bogoc_dang_nhap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+    </View>
+
+    <EditText
+        android:id="@+id/editMSSV"
+        android:layout_width="261dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Mã số sinh viên"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/custom_input"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editPASS"
+        android:layout_width="261dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/editMSSV"
+        app:layout_constraintStart_toStartOf="@+id/editMSSV"
+        app:layout_constraintTop_toBottomOf="@+id/editMSSV"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView2"
+        android:layout_width="308dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="4dp"
+        android:text="Đăng nhập"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <Button
+        android:id="@+id/btn_DangNhap"
+        android:layout_width="260dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="#FFBA00"
+        android:text="Đăng nhập"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/editPASS"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/editPASS"
+        app:layout_constraintTop_toBottomOf="@+id/editPASS" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="355dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="20dp"
+        android:text="Hệ thống hỗ trợ học tập sinh viên"
+        android:textAlignment="center"
+        android:textColor="#403D3D"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
