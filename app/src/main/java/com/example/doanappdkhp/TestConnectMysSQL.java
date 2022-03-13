@@ -37,18 +37,16 @@ public class TestConnectMysSQL extends AppCompatActivity {
         });
     }
     class Async extends AsyncTask<Void, Void, Void> {
-
         String records = "",error="";
 
         @Override
-
         protected Void doInBackground(Void... voids) {
             try
             {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
                 Connection con = DriverManager
-                        .getConnection("jdbc:mysql://192.168.1.6:3306/sqlquanlyhocphan","andro", "andro");
+                        .getConnection("jdbc:mysql://192.168.0.4:3306/sqlquanlyhocphan","andro", "andro");
 
                 Statement statement = con.createStatement();
 
