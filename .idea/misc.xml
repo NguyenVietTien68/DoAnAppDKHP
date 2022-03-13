@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable-anydpi/ic_dkhp.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bo_tron.xml" value="0.236986301369863" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc.xml" value="0.2703125" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc_dang_nhap.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc_trang_chinh.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/custom_input.xml" value="0.2703125" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/custom_view_ten.xml" value="0.2703125" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/activity_trang_chinh.xml" value="0.264" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_info_student.xml" value="0.264" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_main__form.xml" value="0.10975609756097561" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_main_form.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/menu/bottom_menu.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.236986301369863" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
