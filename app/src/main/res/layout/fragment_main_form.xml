@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.MainForm">
+
+    <Button
+        android:id="@+id/btnChuyenXemKhung"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnChuyenXemCongNo"
+        android:layout_alignStart="@+id/btnChuyenXemCongNo"
+        android:layout_alignEnd="@+id/btnChuyenXemCongNo"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="-3dp"
+        android:backgroundTint="#673AB7"
+        android:drawableTop="@drawable/ic_ct_khung"
+        android:text="Chương trình khung"
+        android:textSize="12sp"
+        app:cornerRadius="10dp" />
+
+    <Button
+        android:id="@+id/btnChuyenDoiMK"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnChuyenXemKhung"
+        android:layout_alignBottom="@+id/btnChuyenXemKhung"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toEndOf="@+id/btnChuyenDangKy"
+        android:backgroundTint="#FFC107"
+        android:drawableTop="@drawable/ic_lock"
+        android:text="Đổi mật khẩu"
+        app:cornerRadius="10dp" />
+
+    <Button
+        android:id="@+id/btnChuyenXemCongNo"
+        android:layout_width="120dp"
+        android:layout_height="92dp"
+        android:layout_below="@+id/btnChuyenDangKy"
+        android:layout_alignStart="@+id/btnChuyenDangKy"
+        android:layout_alignEnd="@+id/btnChuyenDangKy"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="0dp"
+        android:backgroundTint="#4EAEDA"
+        android:drawableTop="@drawable/ic_cong_no"
+        android:text="Xem công nợ"
+        app:cornerRadius="10dp" />
+
+    <Button
+        android:id="@+id/btnChuyenXemDiem"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnChuyenXemCongNo"
+        android:layout_alignBottom="@+id/btnChuyenXemCongNo"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toEndOf="@+id/btnChuyenDangKy"
+        android:backgroundTint="#E44A7E"
+        android:drawableTop="@drawable/ic_diem"
+        android:text="kết quả học tập"
+        app:cornerRadius="10dp" />
+
+    <Button
+        android:id="@+id/btnChuyenXemLich"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnChuyenDangKy"
+        android:layout_alignBottom="@+id/btnChuyenDangKy"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="-3dp"
+        android:layout_toEndOf="@+id/btnChuyenDangKy"
+        android:backgroundTint="#61E866"
+        android:drawableTop="@drawable/ic_lich_hoc"
+        android:text="Xem lịch học"
+        app:cornerRadius="10dp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:alpha="0.8"
+        android:background="@drawable/custom_view_ten" />
+
+    <TextView
+        android:id="@+id/txtNameInfo"
+        android:layout_width="321dp"
+        android:layout_height="38dp"
+        android:layout_above="@+id/txtIdInfo"
+        android:layout_alignStart="@+id/txtIdInfo"
+        android:layout_alignEnd="@+id/txtIdInfo"
+        android:layout_marginStart="-3dp"
+        android:layout_marginEnd="-197dp"
+        android:layout_marginBottom="11dp"
+        android:text=" Xin chào Nguyễn Việt Tiến"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/txtIdInfo"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="38dp"
+        android:text="18078881"
+        android:textAlignment="center"
+        android:textColor="#FBF2F2"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnChuyenDangKy"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="54dp"
+        android:backgroundTint="#EF6868"
+        android:drawableTop="@drawable/ic_dkhp"
+        android:text="Đăng ký học phần"
+        app:cornerRadius="10dp" />
+
+</RelativeLayout>
