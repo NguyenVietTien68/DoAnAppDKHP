@@ -1,5 +1,6 @@
 package com.example.doanappdkhp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.doanappdkhp.R;
+import com.example.doanappdkhp.TrangChinh;
+import com.example.doanappdkhp.gui.doi_matkhau;
+import com.example.doanappdkhp.gui.xem_congno;
+import com.example.doanappdkhp.gui.xem_ctkhung;
+import com.example.doanappdkhp.gui.xem_lich;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,9 @@ public class MainForm extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private View view;
+    Button btnChuyenCongNo, btnChuyenDoiMK, btnChuyenXemKhung, btnChuyenLich;
+
 
     public MainForm() {
         // Required empty public constructor
@@ -61,6 +71,40 @@ public class MainForm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_form, container, false) ;
+        view =  inflater.inflate(R.layout.fragment_main_form, container, false);
+        btnChuyenCongNo = view.findViewById(R.id.btnChuyenXemCongNo);
+        btnChuyenDoiMK = view.findViewById(R.id.btnChuyenDoiMK);
+        btnChuyenXemKhung = view.findViewById(R.id.btnChuyenXemKhung);
+        btnChuyenLich = view.findViewById(R.id.btnChuyenXemLich);
+
+        btnChuyenCongNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), xem_congno.class);
+                startActivity(intent);
+            }
+        });
+        btnChuyenDoiMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), doi_matkhau.class);
+                startActivity(intent);
+            }
+        });
+        btnChuyenXemKhung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), xem_ctkhung.class);
+                startActivity(intent);
+            }
+        });
+        btnChuyenLich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), xem_lich.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }
