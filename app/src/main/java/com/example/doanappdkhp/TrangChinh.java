@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.doanappdkhp.entity.TaiKhoanSV;
 import com.example.doanappdkhp.fragment.ViewPagerAdapter;
 import com.example.doanappdkhp.gui.xem_congno;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,12 +22,19 @@ public class TrangChinh extends AppCompatActivity {
 
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
+    TextView tvId;
+    TaiKhoanSV taiKhoanSV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chinh);
 
+//        Intent intent = getIntent();
+//        Bundle bundle = intent.getExtras();
+//        TaiKhoanSV tk1 = (TaiKhoanSV) bundle.getSerializable("mssv");
+
+        //tvId.setText(value1);
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -32,12 +42,12 @@ public class TrangChinh extends AppCompatActivity {
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
 
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
             @Override
             public void onPageSelected(int position) {
                 switch (position){

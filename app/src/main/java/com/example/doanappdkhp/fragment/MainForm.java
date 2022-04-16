@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.doanappdkhp.R;
 import com.example.doanappdkhp.TrangChinh;
+import com.example.doanappdkhp.entity.TaiKhoanSV;
+import com.example.doanappdkhp.gui.DKHP;
 import com.example.doanappdkhp.gui.doi_matkhau;
 import com.example.doanappdkhp.gui.xem_congno;
 import com.example.doanappdkhp.gui.xem_ctkhung;
 import com.example.doanappdkhp.gui.xem_lich;
+import com.example.doanappdkhp.gui.xem_diem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +39,7 @@ public class MainForm extends Fragment {
     private String mParam1;
     private String mParam2;
     private View view;
-    Button btnChuyenCongNo, btnChuyenDoiMK, btnChuyenXemKhung, btnChuyenLich;
+    Button btnChuyenCongNo, btnChuyenDoiMK, btnChuyenXemKhung, btnChuyenLich, btnChuyenXemDiem, btnChuyenDKHP;
 
 
     public MainForm() {
@@ -61,10 +67,12 @@ public class MainForm extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -72,11 +80,28 @@ public class MainForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_main_form, container, false);
+
+        btnChuyenDKHP = view.findViewById(R.id.btnChuyenDangKy);
         btnChuyenCongNo = view.findViewById(R.id.btnChuyenXemCongNo);
         btnChuyenDoiMK = view.findViewById(R.id.btnChuyenDoiMK);
         btnChuyenXemKhung = view.findViewById(R.id.btnChuyenXemKhung);
         btnChuyenLich = view.findViewById(R.id.btnChuyenXemLich);
+        btnChuyenXemDiem = view.findViewById(R.id.btnChuyenXemDiem);
 
+        btnChuyenDKHP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplication(), DKHP.class);
+                startActivity(intent);
+            }
+        });
+        btnChuyenXemDiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplication(), xem_diem.class);
+                startActivity(intent);
+            }
+        });
         btnChuyenCongNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
