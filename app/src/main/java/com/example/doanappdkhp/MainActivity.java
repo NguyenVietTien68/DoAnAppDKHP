@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,39 +30,43 @@ public class MainActivity extends AppCompatActivity {
     private Context mcontext;
     List<TaiKhoanSV> mListTaiKhoanSv;
     private TaiKhoanSV mtk;
+    public static String mssv, pass;
     //TaiKhoanSV tk;
     private IClickMSSV iClickMSSV;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        progressBar = findViewById(R.id.progressBarLogin);
+        progressBar.setVisibility(View.GONE);
         edtMSSV = findViewById(R.id.edtMSSV);
         edtPass = findViewById(R.id.edtPASS);
         mListTaiKhoanSv = new ArrayList<>();
 
         btnDangNhap = findViewById(R.id.btn_DangNhap);
-
+        getListTaiKhoanSV();
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
 
                 clickLogin();
 
             }
         });
+
     }
 
     private void clickLogin() {
-        getListTaiKhoanSV();
-        String mssv = edtMSSV.getText().toString().trim();
-        String pass = edtPass.getText().toString().trim();
+         mssv = edtMSSV.getText().toString().trim();
+         pass = edtPass.getText().toString().trim();
 
 
         if(mListTaiKhoanSv == null || mListTaiKhoanSv.isEmpty()){
-            Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
             return;
         }
         boolean isHasUser = false;
@@ -76,21 +81,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if(isHasUser){
-            //startActivity(new Intent(MainActivity.this, TrangChinh.class));
-            Intent intent = new Intent(MainActivity.this, TrangChinh.class);
-            Bundle bundle = new Bundle();
-            TaiKhoanSV tk = new TaiKhoanSV(mssv);
-            bundle.putSerializable("mssv",tk);
-            intent.putExtras(bundle);
-            //iClickMSSV.onClickMSSV(mtk);
-            startActivity(intent);
-
-
-
+            getListTaiKhoanSV();
+            startActivity(new Intent(MainActivity.this, TrangChinh.class));
             Toast.makeText(MainActivity.this, "Đặng nhập thành công!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            finish();
         }else{
             Toast.makeText(MainActivity.this, "Mssv hoặc pass sai", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.INVISIBLE);
         }
+
     }
 
 //    private boolean isValid(String clearTextPassword, String hashedPass) {
@@ -101,8 +101,10 @@ public class MainActivity extends AppCompatActivity {
         ApiService.apiService.getTaiKhoanSv().enqueue(new Callback<List<TaiKhoanSV>>() {
             @Override
             public void onResponse(Call<List<TaiKhoanSV>> call, Response<List<TaiKhoanSV>> response) {
-
+                //clickLogin();
                 mListTaiKhoanSv = response.body();
+
+
                 //Toast.makeText(MainActivity.this, "" + mListTaiKhoanSv.get(1), Toast.LENGTH_SHORT).show();
             }
             @Override

@@ -49,10 +49,13 @@ public class LHPDaDangKyAdapter extends RecyclerView.Adapter<LHPDaDangKyAdapter.
         holder.tvTenMhHP.setText(lhpDaDangKy.getTenMHHP());
         holder.tvNhom.setText(lhpDaDangKy.getNhom());
         holder.tvGiangVien.setText(lhpDaDangKy.getHoTen());
+
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 iClickItemLHPDDK.onCliCkItemLHPDDK(lhpDaDangKy);
+
             }
         });
     }

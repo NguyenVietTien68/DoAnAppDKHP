@@ -1,11 +1,15 @@
 package com.example.doanappdkhp.gui;
 
+import static com.example.doanappdkhp.MainActivity.mssv;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +37,15 @@ public class xem_congno extends AppCompatActivity {
     RecyclerView rcv;
     CongNoAdapter adt;
     TextView tvTongTien;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xem_congno);
 
+        progressBar = findViewById(R.id.progressBarCongNo);
+        progressBar.setVisibility(View.VISIBLE);
         tvTongTien = findViewById(R.id.tvTongTienCN);
         rcv = findViewById(R.id.rcv_CongNo);
         congNoList = new ArrayList<>();
@@ -50,7 +57,7 @@ public class xem_congno extends AppCompatActivity {
 
     }
     private void getCongNo() {
-        ApiService.apiService.getCongNoTheoMSSV("0001").enqueue(new Callback<List<CongNo>>() {
+        ApiService.apiService.getCongNoTheoMSSV(mssv).enqueue(new Callback<List<CongNo>>() {
 
             @Override
             public void onResponse(Call<List<CongNo>> call, Response<List<CongNo>> response) {
@@ -67,7 +74,7 @@ public class xem_congno extends AppCompatActivity {
                             //tvTongTien.setText(String.valueOf((congNoList.get(i).getSoTinChi())*790000));
                             Integer a = congNoList.get(i).getSoTinChi();
                             lstTong.add(a);
-
+                            progressBar.setVisibility(View.GONE);
 //                            String tenMHHP = congNoArrayList.get(i).getTenMHHP();
 //
 //                            int sTC = congNoArrayList.get(i).getSoTinChi();

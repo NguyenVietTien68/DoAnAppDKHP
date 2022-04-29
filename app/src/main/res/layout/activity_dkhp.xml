@@ -29,11 +29,11 @@
                 android:id="@+id/textView29"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="Đăng ký học phần"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"/>
+                android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -105,21 +105,47 @@
                     app:layout_constraintStart_toEndOf="@+id/textView5"
                     app:layout_constraintTop_toBottomOf="@+id/spinnerHocKyMHP"
                     tools:ignore="TouchTargetSizeCheck" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Danh sách môn học phần"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_MonHocPhan"
-                android:layout_width="360dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center" />
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách môn học phần"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_MonHocPhan"
+                    android:layout_width="360dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarMHP"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rcv_MonHocPhan"
+                    app:layout_constraintStart_toStartOf="@+id/rcv_MonHocPhan"
+                    app:layout_constraintTop_toBottomOf="@+id/textView45" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/textView39"
@@ -149,7 +175,7 @@
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.444"
+                    app:layout_constraintHorizontal_bias="0.375"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view17" />
 
@@ -311,12 +337,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/rcv_LopHocPhan" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_LopHocPhanLTvsTH"
+                    android:id="@+id/rcv_LopHocPhanLT"
                     android:layout_width="380dp"
                     android:layout_height="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textVi" />
+
                 <TextView
                     android:id="@+id/t"
                     android:layout_width="match_parent"
@@ -328,7 +355,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcv_LopHocPhanLTvsTH" />
+                    app:layout_constraintTop_toBottomOf="@+id/rcv_LopHocPhanLT" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_LopHocPhanTH"
@@ -368,8 +395,50 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lhpĐK" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <ProgressBar
+                    android:id="@+id/progressBarLHP"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="116dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rcv_LopHocPhan"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toStartOf="@+id/rcv_LopHocPhan"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarLT"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rcv_LopHocPhanLT"
+                    app:layout_constraintStart_toStartOf="@+id/rcv_LopHocPhanLT"
+                    app:layout_constraintTop_toBottomOf="@+id/textVi" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarTH"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rcv_LopHocPhanTH"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="@+id/rcv_LopHocPhanTH"
+                    app:layout_constraintTop_toBottomOf="@+id/t" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarDelete"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.476"
+                    app:layout_constraintStart_toStartOf="@+id/rcv_LHPDDK"
+                    app:layout_constraintTop_toBottomOf="@+id/lhpĐK" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>

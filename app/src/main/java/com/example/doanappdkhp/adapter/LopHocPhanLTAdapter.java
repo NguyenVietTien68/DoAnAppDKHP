@@ -8,12 +8,14 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanappdkhp.R;
 import com.example.doanappdkhp.entity.LopHocPhanLT;
+import com.example.doanappdkhp.gui.DKHP;
 import com.example.doanappdkhp.my_interface.IClickItemNhomLT;
 
 import java.text.DateFormat;
@@ -61,29 +63,33 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
 //            }
 //        });
         //holder.rdoButton.setChecked(false);
-        holder.rdoButton.setOnClickListener(new View.OnClickListener() {
+        holder.rdoButtonLT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (check) {
-                    holder.rdoButton.setChecked(false);
+                    holder.rdoButtonLT.setChecked(false);
                     check = false;
-
+                    DKHP.nhomlt = "";
+                    Toast.makeText(mcontext.getApplicationContext(), "Chưa chọn lớp LT", Toast.LENGTH_SHORT).show();
                     //write code for when button is unchecked
                 } else {
                     check = true;
-                    holder.rdoButton.setChecked(true);
+                    holder.rdoButtonLT.setChecked(true);
+                    DKHP.nhomlt = DKHP.nhomlt;
+
                     //write code for when button is checked
                 }
             }
         });
-        holder.rdoButton.setChecked(position == selectedPosition);
-        holder.rdoButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.rdoButtonLT.setChecked(position == selectedPosition);
+        holder.rdoButtonLT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked ){
                     selectedPosition = holder.getAdapterPosition();
                     iClickItemNhomLT.onClickItemNhomLTvsTH(lopHocPhanLT);
                 }
+                //notifyDataSetChanged();
             }
         });
     }
@@ -104,10 +110,10 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
         return lopHocPhanLTS.size();
     }
 
-    public class ThingViewHolder extends RecyclerView.ViewHolder {
+    public static class ThingViewHolder extends RecyclerView.ViewHolder {
         TextView tvMaNhom, tvGiangVien, tvNgayHoc, tvPhongHoc, tvTietHoc, tvNgayBatDau;
         Button btnChonLTvsTH;
-        RadioButton rdoButton;
+        public static RadioButton rdoButtonLT;
 
         public ThingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,7 +124,7 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
             tvTietHoc = itemView.findViewById(R.id.tv_TietHocLTTH);
             tvNgayBatDau = itemView.findViewById(R.id.tv_NgayBatDauLTTH);
             //btnChonLTvsTH = itemView.findViewById(R.id.btn_ChonNhomLTvsTH);
-            rdoButton = itemView.findViewById(R.id.radioButtonLHPLT);
+            rdoButtonLT = itemView.findViewById(R.id.radioButtonLHPLT);
 
         }
     }

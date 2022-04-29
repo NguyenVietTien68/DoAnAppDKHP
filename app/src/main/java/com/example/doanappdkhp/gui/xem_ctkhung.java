@@ -1,11 +1,15 @@
 package com.example.doanappdkhp.gui;
 
+import static com.example.doanappdkhp.MainActivity.mssv;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +34,14 @@ public class xem_ctkhung extends AppCompatActivity {
     RecyclerView rcv;
     CTKhungAdapter adt;
     TextView tvChuyenNganh;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xem_ctkhung);
 
+        progressBar = findViewById(R.id.progressBarCTKhung);
+        progressBar.setVisibility(View.VISIBLE);
         tvChuyenNganh = findViewById(R.id.tv_ChuyenNganhCTK);
         rcv = findViewById(R.id.rcv_CTK);
         ctKhungArrayList = new ArrayList<>();
@@ -46,11 +53,11 @@ public class xem_ctkhung extends AppCompatActivity {
     }
 
     private void getCTKhung() {
-        ApiService.apiService.getCTKhungTheoMSSV("0002").enqueue(new Callback<List<CTKhung>>() {
-
+        ApiService.apiService.getCTKhungTheoMSSV(mssv).enqueue(new Callback<List<CTKhung>>() {
             @Override
             public void onResponse(Call<List<CTKhung>> call, Response<List<CTKhung>> response) {
                 //Toast.makeText(xem_ctkhung.this, "Call api success!!!", Toast.LENGTH_SHORT).show();
+
                 ctKhungArrayList = response.body();
 
                 //Toast.makeText(xem_ctkhung.this, ""+ctKhungArrayList.size(), Toast.LENGTH_SHORT).show();
@@ -59,6 +66,8 @@ public class xem_ctkhung extends AppCompatActivity {
                        int ctk = ctKhungArrayList.size();
                             for(int i = 0; i< ctk; i++) {
                             tvChuyenNganh.setText(String.valueOf(ctKhungArrayList.get(i).getTenChuyenNganh()));
+                            adt.notifyDataSetChanged();
+                                progressBar.setVisibility(View.GONE);
 //                           tvhocky.setText(String.valueOf(ctKhungArrayList.get(1).getHocKy()));
 //                           tvmamhp.setText(ctKhungArrayList.get(1).getMaMHP());
 //                            tvtenmhhp.setText(ctKhungArrayList.get(1).getTenMHHP());

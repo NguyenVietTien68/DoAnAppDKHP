@@ -1,15 +1,20 @@
 package com.example.doanappdkhp.gui;
 
+import static com.example.doanappdkhp.MainActivity.mssv;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -28,16 +33,20 @@ import com.example.doanappdkhp.entity.KiemTraLichHoc;
 import com.example.doanappdkhp.entity.LHPDaDangKy;
 import com.example.doanappdkhp.entity.LopHocPhanTH;
 import com.example.doanappdkhp.entity.MonTienQuyet;
+import com.example.doanappdkhp.entity.NamHoc;
 import com.example.doanappdkhp.entity.SLDaDangKy;
 import com.example.doanappdkhp.entity.LopHocPhan;
 import com.example.doanappdkhp.entity.LopHocPhanLT;
 import com.example.doanappdkhp.entity.MonHocPhan;
+import com.example.doanappdkhp.fragment.InfoStudent;
 import com.example.doanappdkhp.my_interface.ICLickItemLHP;
 import com.example.doanappdkhp.my_interface.IClickItemLHPDDK;
 import com.example.doanappdkhp.my_interface.IClickItemLHPTH;
 import com.example.doanappdkhp.my_interface.IClickItemMHP;
 import com.example.doanappdkhp.my_interface.IClickItemNhomLT;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,24 +55,34 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DKHP extends AppCompatActivity {
+//    public static NamHoc namHoc;
+    public  static ArrayList<String> listNam ;
+    public static ArrayAdapter adapternam;
+    String bien;
     private static final String TAG = "MainActivity";
+    String[] hocky1 = {"08", "09", "10","11"};
+    String[] hocky2 = {"12", "01", "02","03","04", "05"};
+    String[] hocky3 = {"06", "07"};
     String[] nam = {"2021-2022", "2022-2023", "2023-2024", "2024-2025"};
     String[] hocky = {"1", "2", "3"};
-    Spinner nam_spinner, hocky_spinner;
+    ProgressBar progressBarMHP, progressBarLHP, progressBarLT, progressBarTH, progressBarDelete;
+    public static Spinner nam_spinner;
+    public static Spinner hocky_spinner;
     Button btnGetDSMHP, btnChonMaMHP;
-    String mhp, lhp, nhomltvsth, lhpddk;
+    public  static String mhp, lhp, nhomlt,nhomth, lhpddk;
     int slDDK, siso;
+    int ddk;
+    public static int slLT, slTH, slnhomLT, slnhomTH;
+    String malhp;
     int mtq, ktmtq;
-    int kiemTraLH;
+    int kiemTraLT, kiemTraTH;
     int soluong;
     String namkt;
     int hockykt;
     Button btnDKHP;
     String lhpddkkt;
-    RadioGroup rdoGroup;
     RadioButton rdoButton;
     boolean check  = false;
-
 
     List<KiemTraLichHoc> kiemTraLichHocList;
     List<LHPDaDangKy> lhpDaDangKyList;
@@ -71,48 +90,57 @@ public class DKHP extends AppCompatActivity {
     List<LopHocPhanTH>lopHocPhanTHList;
     List<MonHocPhan> monHocPhanList;
     List<LopHocPhan> lopHocPhanList;
+    List<NamHoc> namHocList = new ArrayList<>();
     RecyclerView rcvMHP, rcvLHP, rcvLHPLT, rcvLHPDDK, rcvLHPTH;
     LHPDaDangKyAdapter adtLHPDDK;
-    LopHocPhanLTAdapter adtLHPLTTH;
+    LopHocPhanLTAdapter adtLT;
     LopHocPhanTHAdapter adtTH;
     MonHocPhanAdapter adtMHP;
     LopHocPhanAdapter adtLHP;
 
+    LocalDate dateToday;
+
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dkhp);
 
+        progressBarMHP = findViewById(R.id.progressBarMHP);
+        progressBarMHP.setVisibility(View.GONE);
+        progressBarLHP = findViewById(R.id.progressBarLHP);
+        progressBarLHP.setVisibility(View.GONE);
+        progressBarLT = findViewById(R.id.progressBarLT);
+        progressBarLT.setVisibility(View.GONE);
+        progressBarTH = findViewById(R.id.progressBarTH);
+        progressBarTH.setVisibility(View.GONE);
+        progressBarDelete = findViewById(R.id.progressBarDelete);
+        progressBarDelete.setVisibility(View.GONE);
         rdoButton = findViewById(R.id.radioButtonLHPLT);
-        //rdoGroup = findViewById(R.id.rdoGroup);
+        
+        //----------lấy tháng hiện tại so sánh ----------------------//
+        dateToday = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
+        String datefomat = formatter.format(dateToday);
+        Log.d("Month:---------",datefomat+"");
+
+//        for (int i = 0; i<hocky2.length; i++){
+//            //hocky2[i].toString();
+//            ky2 = hocky2[i];
+//            Log.d("hihihihi",ky2);
+//            if (datefomat.contains(ky2)){
+//                Toast.makeText(DKHP.this, "heheheheheheh", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+
+        //Log.d("HocKi2", );
+
+        getNamHoc();
+        listNam = new ArrayList<>();
 
 //-------------------Đăng kí học phần cho sinh viên-------------------------//
         btnDKHP = findViewById(R.id.btnDKHP);
-        btnDKHP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 if(mtq >ktmtq){
-                    Toast.makeText(DKHP.this, "Sinh viên chưa học môn tiên quyết", Toast.LENGTH_SHORT).show();
-                }else if(kiemTraLH >0){
-                    Toast.makeText(DKHP.this, "Trùng lịch học", Toast.LENGTH_SHORT).show();
-                }
-                else{
 
-                     //////
-                    updateSLSVDKHP();
-                    postDKHP();
-                }
-                mhp = "";
-                lhp = "";
-                nhomltvsth = "";
-                lhpddk = "";
-                getDSLopHocPhanTH();
-                getDSMonHocPhan();
-                getDSLopHocPhan();
-                getDSLopHocPhanLT();
-                getDSLopHocPhanDDK();
-            }
-        });
 //        Bundle bundle = getIntent().getExtras();
 //
 //        if (bundle==null){
@@ -126,23 +154,118 @@ public class DKHP extends AppCompatActivity {
         nam_spinner = findViewById(R.id.spinnerNamMHP);
         hocky_spinner = findViewById(R.id.spinnerHocKyMHP);
 
-        ArrayAdapter adapternam = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, nam);
+
+        adapternam = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,listNam);
         adapternam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         nam_spinner.setAdapter(adapternam);
+
 
         ArrayAdapter adapterhocky = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, hocky);
         adapterhocky.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hocky_spinner.setAdapter(adapterhocky);
 
         hockykt  = Integer.parseInt(hocky_spinner.getSelectedItem().toString());
-        namkt = nam_spinner.getSelectedItem().toString();
+
+        //namkt = nam_spinner.getSelectedItem().toString();
+        btnDKHP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                for (int i = 0; i<hocky1.length; i++){
+//                    //hocky2[i].toString();
+//                    String ky1;
+//                    ky1 = hocky1[i];
+//                    //Toast.makeText(DKHP.this, "HKKT"+Integer.parseInt(hocky_spinner.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+//                    Log.d("hihihihi",ky1);
+//                    if (datefomat.contains(ky1) && Integer.parseInt(hocky_spinner.getSelectedItem().toString())==2 || Integer.parseInt(hocky_spinner.getSelectedItem().toString())==3){
+//                        Toast.makeText(DKHP.this, "hết thời gian gian đăng ký", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }else{
+//                        for (int u = 0; u<hocky2.length; u++){
+//                            //hocky2[i].toString();
+//                            String ky2;
+//                            ky2 = hocky2[u];
+//                            //Toast.makeText(DKHP.this, "HKKT"+Integer.parseInt(hocky_spinner.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+//                            Log.d("hihihihi",ky2);
+//                            if (datefomat.contains(ky2) && Integer.parseInt(hocky_spinner.getSelectedItem().toString())==1){
+//                                Toast.makeText(DKHP.this, "hết thời gian gian đăng ký", Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }else{
+//                                for (int j = 0; j<hocky3.length; j++){
+//                                    //hocky2[i].toString();
+//                                    String ky3;
+//                                    ky3 = hocky3[j];
+//                                    //Toast.makeText(DKHP.this, "HKKT"+Integer.parseInt(hocky_spinner.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+//                                    Log.d("hihihihi",ky3);
+//                                    if (datefomat.contains(ky3) && Integer.parseInt(hocky_spinner.getSelectedItem().toString())==1 || Integer.parseInt(hocky_spinner.getSelectedItem().toString())==2){
+//                                        Toast.makeText(DKHP.this, "hết thời gian gian đăng ký", Toast.LENGTH_SHORT).show();
+//                                        return;
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+//                    }
+//
+//                }
+
+
+                if(mtq >ktmtq){
+                    Toast.makeText(DKHP.this, "Sinh viên chưa học môn tiên quyết", Toast.LENGTH_SHORT).show();
+                }else if(kiemTraLT >0){
+                    Toast.makeText(DKHP.this, "Trùng lịch học lý thuyết", Toast.LENGTH_SHORT).show();
+                }else if(kiemTraTH > 0){
+                    Toast.makeText(DKHP.this, "Trùng lịch học thực hành", Toast.LENGTH_SHORT).show();
+
+                }
+                //khi lớp học phần có cả lý thuyết vs thực hành
+                else if(slTH >0 && slLT >0 && slnhomTH >0 && slnhomLT >0){
+                    //----Kiểm tra xem sinh viên chọn cả 2 nhóm TH vs LT hay chưa
+                    if(slTH >0 && slLT >0 && slnhomTH >0 && nhomlt==""){
+                        Toast.makeText(DKHP.this, "Chưa chọn nhóm lý thuyết", Toast.LENGTH_SHORT).show();
+                    }else if (slTH >0 && slLT >0 && slnhomLT > 0 && nhomth == "" ){
+                        Toast.makeText(DKHP.this, "Chưa chọn nhóm thực hành", Toast.LENGTH_SHORT).show();
+                    }else{
+                        updateSLSVDKHP();
+                        postDKHPTH();
+                        postDKHPLT();
+                        adtMHP.notifyDataSetChanged();
+
+                    }
+                    //khi lớp học phần chỉ có lý thuyết
+                }else if(slLT >0 && slTH ==0 && slnhomLT >0){
+                    updateSLSVDKHP();
+                    postDKHPLT();
+                    //khi lớp học phần chỉ có thực hành
+                }else if (slTH >0 && slLT ==0 && slnhomTH >0){
+                    updateSLSVDKHP();
+                    postDKHPTH();
+                }
+                mhp = "";
+                lhp = "";
+                nhomlt = "";
+                nhomth = "";
+                lhpddk = "";
+                getDSLopHocPhanTH();
+                getDSMonHocPhan();
+                getDSLopHocPhan();
+                getDSLopHocPhanLT();
+                getDSLopHocPhanDDK();
+            }
+        });
 //-------------------------Chọn học kì vs Năm rồi nhấn lọc-----------------------------///
         btnGetDSMHP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBarMHP.setVisibility(View.VISIBLE);
+                adtLHP.notifyDataSetChanged();
+                adtLHPDDK.notifyDataSetChanged();
+                adtTH.notifyDataSetChanged();
+                adtLT.notifyDataSetChanged();
+                adtMHP.notifyDataSetChanged();
                 mhp = "";
                 lhp = "";
-                nhomltvsth = "";
+                nhomlt = "";
+                nhomth = "";
                 lhpddk = "";
                 getDSLopHocPhanTH();
                 getDSMonHocPhan();
@@ -161,6 +284,7 @@ public class DKHP extends AppCompatActivity {
         adtMHP = new MonHocPhanAdapter(getApplicationContext(), (ArrayList<MonHocPhan>) monHocPhanList, new IClickItemMHP() {
             @Override
             public void onClickItemMHP(MonHocPhan monHocPhan) {
+                progressBarLHP.setVisibility(View.VISIBLE);
                 //oclickChonMHP(monHocPhan);
                 mhp = monHocPhan.getMaMHP();
                 rcvMHP.post(new Runnable() {
@@ -181,87 +305,92 @@ public class DKHP extends AppCompatActivity {
         adtLHP = new LopHocPhanAdapter(getApplicationContext(), (ArrayList<LopHocPhan>) lopHocPhanList, new ICLickItemLHP() {
             @Override
             public void onClickItemLHP(LopHocPhan lopHocPhan) {
+
+                progressBarLT.setVisibility(View.VISIBLE);
+                progressBarTH.setVisibility(View.VISIBLE);
+                getLopHocPhan();
                 lhp = lopHocPhan.getMaLopHP();
                 slDDK = lopHocPhan.getDaDangKy();
+                Toast.makeText(DKHP.this, "sl lhp ddk = "+slDDK, Toast.LENGTH_SHORT).show();
                 siso = lopHocPhan.getSiSo();
                 rcvLHP.post(new Runnable() {
                     @Override
                     public void run() {
                         adtLHP.notifyDataSetChanged();
+                        adtLT.notifyDataSetChanged();
+                        adtTH.notifyDataSetChanged();
+                        if (siso == slDDK) {
+                            Toast.makeText(DKHP.this, "Lớp đã đầy", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            btnDKHP.setEnabled(false);
+                            //Toast.makeText(DKHP.this, "So lượng lhp Thực Hành = "+slTH, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(DKHP.this, "So lượng lhp ly thuyet = "+slLT, Toast.LENGTH_SHORT).show();
+                            getDSLopHocPhanLT();
+                            getDSLopHocPhanTH();
+                            getMonTienQuyet();
+                            getKiemTraMonTienQuyet();
+                            //Toast.makeText(DKHP.this, "Mtq= "+ mtq + "KTmtq= "+ ktmtq, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
-                if (siso == slDDK) {
-                    Toast.makeText(DKHP.this, "Lớp đã đầy", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    btnDKHP.setEnabled(false);
-                    Toast.makeText(DKHP.this, "So lượng lhp Thực Hành = "+soluong, Toast.LENGTH_SHORT).show();
-                    getDSLopHocPhanLT();
-                    getDSLopHocPhanTH();
-                    getMonTienQuyet();
-                    getKiemTraMonTienQuyet();
-                    Toast.makeText(DKHP.this, "Mtq= "+ mtq + "KTmtq= "+ ktmtq, Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
         rcvLHP.setAdapter(adtLHP);
         rcvLHP.setLayoutManager(new GridLayoutManager(DKHP.this, 1));
         rcvLHP.setHasFixedSize(true);
+        adtLHP.notifyDataSetChanged();
+
 
 //--------------------DS Lớp học phần ly thuyet ------------------------------------------//
-        rcvLHPLT = findViewById(R.id.rcv_LopHocPhanLTvsTH);
+        rcvLHPLT = findViewById(R.id.rcv_LopHocPhanLT);
         lopHocPhanLTList = new ArrayList<>();
-        adtLHPLTTH = new LopHocPhanLTAdapter(getApplicationContext(), (ArrayList<LopHocPhanLT>) lopHocPhanLTList, new IClickItemNhomLT() {
+        adtLT = new LopHocPhanLTAdapter(getApplicationContext(), (ArrayList<LopHocPhanLT>) lopHocPhanLTList, new IClickItemNhomLT() {
             @Override
             public void onClickItemNhomLTvsTH(LopHocPhanLT lopHocPhanLT) {
-                nhomltvsth = lopHocPhanLT.getMaNhom();
-                getKiemTraTrungLichHoc();
+                nhomlt = lopHocPhanLT.getMaNhom();
+                slnhomLT = lopHocPhanLT.getMaNhom().length();
+                getKiemTraTrungLichHocLT();
                 btnDKHP.setEnabled(true);
                 rcvLHPLT.post(new Runnable() {
                     @Override
                     public void run() {
-                        adtLHPLTTH.notifyDataSetChanged();
-                        Toast.makeText(DKHP.this, "LichHocTrung = "+kiemTraLH, Toast.LENGTH_SHORT).show();
+                        adtLT.notifyDataSetChanged();
+
+                        //Toast.makeText(DKHP.this, "Nhom Lt = "+slnhomLT, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DKHP.this, "LichHocTrung = "+kiemTraLT, Toast.LENGTH_SHORT).show();
                     }
 
                 });
-                //Toast.makeText(DKHP.this, "nam = "+namkt, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "hocky = "+hockykt, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "lop1 = "+lhp, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "nhom1 = "+nhomltvsth, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "lop2 = "+lhp, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "nhom2 = "+nhomltvsth, Toast.LENGTH_SHORT).show();
-                //------------------------------Kiểm tra môn tiên quyết----------------------------------//
+
 
             }
         });
 
-        rcvLHPLT.setAdapter(adtLHPLTTH);
+        rcvLHPLT.setAdapter(adtLT);
         rcvLHPLT.setLayoutManager(new GridLayoutManager(DKHP.this, 1));
         rcvLHPLT.setHasFixedSize(true);
 //--------------------DS Lớp học phần thực hành------------------------------------------//
         rcvLHPTH = findViewById(R.id.rcv_LopHocPhanTH);
         lopHocPhanTHList = new ArrayList<>();
+
         adtTH = new LopHocPhanTHAdapter(getApplicationContext(), (ArrayList<LopHocPhanTH>) lopHocPhanTHList, new IClickItemLHPTH() {
             @Override
             public void onClickItemTH(LopHocPhanTH lopHocPhanTH) {
-                nhomltvsth = lopHocPhanTH.getMaNhom();
-                soluong = lopHocPhanTH.getMaNhom().length();
-                getKiemTraTrungLichHoc();
+                nhomth = lopHocPhanTH.getMaNhom();
+                slnhomTH = lopHocPhanTH.getMaNhom().length();
+                getKiemTraTrungLichHocTH();
                 btnDKHP.setEnabled(true);
                 rcvLHPTH.post(new Runnable() {
                     @Override
                     public void run() {
                         adtTH.notifyDataSetChanged();
+                        //Toast.makeText(DKHP.this, "Nhom TH = "+slnhomTH, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DKHP.this, "LichHocTrung = "+kiemTraTH, Toast.LENGTH_SHORT).show();
                     }
                 });
-                //Toast.makeText(DKHP.this, "nam = "+namkt, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "hocky = "+hockykt, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "lop1 = "+lhp, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "nhom1 = "+nhomltvsth, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "lop2 = "+lhp, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(DKHP.this, "nhom2 = "+nhomltvsth, Toast.LENGTH_SHORT).show();
-                Toast.makeText(DKHP.this, "LichHocTrung = "+kiemTraLH, Toast.LENGTH_SHORT).show();
+
                 //------------------------------Kiểm tra môn tiên quyết----------------------------------//
             }
         });
@@ -269,32 +398,47 @@ public class DKHP extends AppCompatActivity {
         rcvLHPTH.setLayoutManager(new GridLayoutManager(DKHP.this, 1));
         rcvLHPTH.setHasFixedSize(true);
 
-//----------------------------------Lớp học phần đã đăng ký-------------------------------------------//
+//----------------------------------Lớp học phần đã đăng ký------------- Delete------------------------------//
         rcvLHPDDK = findViewById(R.id.rcv_LHPDDK);
         lhpDaDangKyList = new ArrayList<>();
         adtLHPDDK = new LHPDaDangKyAdapter(getApplicationContext(), (ArrayList<LHPDaDangKy>) lhpDaDangKyList, new IClickItemLHPDDK() {
             @Override
             public void onCliCkItemLHPDDK(LHPDaDangKy lhpDaDangKy) {
+                adtLHPDDK.notifyDataSetChanged();
+                lhpddk = lhpDaDangKy.getMaLopHP();
+                getLopHocPhan();
+
             //----------------Dialog thông báo--------------------------------------//
                 AlertDialog.Builder builder = new AlertDialog.Builder(DKHP.this);
                 builder.setTitle("Thông báo");
                 builder.setMessage("Xác nhận hủy môn học phần!!!");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        lhpddk = lhpDaDangKy.getMaLopHP();
+                        progressBarDelete.setVisibility(View.VISIBLE);
+
                         getDSLopHocPhanDDK();
                         getDSLopHocPhan();
-                        deleteLHPDDK();
-                        updateLHPDDK();
+                        getDSMonHocPhan();
+                        adtLHPDDK.notifyDataSetChanged();
+                        rcvLHPDDK.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                adtLHPDDK.notifyDataSetChanged();
+                                adtLHP.notifyDataSetChanged();
+                                adtMHP.notifyDataSetChanged();
+                                deleteLHPDDK();
+                                updateLHPDDK();
 
+                            }
+                        });
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),
-                                "No Button Clicked",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "No Button Clicked",Toast.LENGTH_SHORT).show();
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -304,17 +448,21 @@ public class DKHP extends AppCompatActivity {
         rcvLHPDDK.setAdapter(adtLHPDDK);
         rcvLHPDDK.setLayoutManager(new GridLayoutManager(DKHP.this, 1));
         rcvLHPDDK.setHasFixedSize(true);
+        adtLHPDDK.notifyDataSetChanged();
     }
 
 
     public void getDSMonHocPhan() {
-        ApiService.apiService.getDSMonHocPhan("0001", Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString()).enqueue(new Callback<List<MonHocPhan>>() {
+        ApiService.apiService.getDSMonHocPhan(mssv, Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString()).enqueue(new Callback<List<MonHocPhan>>() {
             @Override
             public void onResponse(Call<List<MonHocPhan>> call, Response<List<MonHocPhan>> response) {
                 Toast.makeText(DKHP.this, "Mon hoc phan "+ response.body().size(), Toast.LENGTH_SHORT).show();
                 monHocPhanList = response.body();
-                if (monHocPhanList != null) {
-                    adtMHP.setMonHocPhans((ArrayList<MonHocPhan>) monHocPhanList);
+                if (response.isSuccessful()){
+                    if (monHocPhanList != null) {
+                        adtMHP.setMonHocPhans((ArrayList<MonHocPhan>) monHocPhanList);
+                        progressBarMHP.setVisibility(View.GONE);
+                    }
                 }
             }
             @Override
@@ -324,32 +472,19 @@ public class DKHP extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if(adtMHP != null){
-//            adtMHP.release();
-//        }
-//    }
-//    public void oclickChonMHP(MonHocPhan monHocPhan) {
-//        Intent intent = new Intent(this, getClass());
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("mamhp",monHocPhan);
-//        intent.putExtras(bundle);
-//
-//        //startActivity(intent);
-//
-//    }
-    //String b = monHocPhan.getMaMHP();
-    public void getDSLopHocPhan() {
-        ApiService.apiService.getDSLopHocPhan(mhp).enqueue(new Callback<List<LopHocPhan>>() {
-
+//---------------Lấy một lớp học phần-----------------------------------------------//
+    public void getLopHocPhan() {
+        ApiService.apiService.getLopHocPhan(lhpddk).enqueue(new Callback<List<LopHocPhan>>() {
             @Override
             public void onResponse(Call<List<LopHocPhan>> call, Response<List<LopHocPhan>> response) {
                 //Toast.makeText(DKHP.this, "LopHocPhan "+ response.body().size(), Toast.LENGTH_SHORT).show();
                 lopHocPhanList = response.body();
                 if (lopHocPhanList != null) {
-                    adtLHP.setLopHocPhans((ArrayList<LopHocPhan>) lopHocPhanList);
+                    for (int i = 0; i< response.body().size(); i++){
+                        ddk = lopHocPhanList.get(i).getDaDangKy();
+                        malhp =  lopHocPhanList.get(i).getMaLopHP();
+                        Toast.makeText(DKHP.this, "DDk = "+ddk, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
             @Override
@@ -358,7 +493,28 @@ public class DKHP extends AppCompatActivity {
             }
         });
     }
-    //---------------Lấy môn tiên quyết------------------------------------------------//
+//---------------Lấy danh sách lớp học phần-----------------------------------------------//
+    public void getDSLopHocPhan() {
+        ApiService.apiService.getDSLopHocPhan(mhp).enqueue(new Callback<List<LopHocPhan>>() {
+            @Override
+            public void onResponse(Call<List<LopHocPhan>> call, Response<List<LopHocPhan>> response) {
+                //Toast.makeText(DKHP.this, "LopHocPhan "+ response.body().size(), Toast.LENGTH_SHORT).show();
+                lopHocPhanList = response.body();
+                if (response.isSuccessful()){
+                    if (lopHocPhanList != null) {
+                        adtLHP.setLopHocPhans((ArrayList<LopHocPhan>) lopHocPhanList);
+                    }
+                    progressBarLHP.setVisibility(View.GONE);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<List<LopHocPhan>> call, Throwable t) {
+                Toast.makeText(DKHP.this, "Call api error LHP", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+//---------------Lấy môn tiên quyết------------------------------------------------//
     public void getMonTienQuyet() {
         ApiService.apiService.getMonTienQuyet(lhp).enqueue(new Callback<List<MonTienQuyet>>() {
             @Override
@@ -372,14 +528,13 @@ public class DKHP extends AppCompatActivity {
             }
         });
     }
-    //---------------Kiểm tra môn tiên quyết------------------------------------------------//
+//---------------Kiểm tra môn tiên quyết------------------------------------------------//
     public void getKiemTraMonTienQuyet() {
-        ApiService.apiService.getKiemTraMonTienQuyet("0001",lhp).enqueue(new Callback<List<MonTienQuyet>>() {
+        ApiService.apiService.getKiemTraMonTienQuyet(mssv,lhp).enqueue(new Callback<List<MonTienQuyet>>() {
 
             @Override
             public void onResponse(Call<List<MonTienQuyet>> call, Response<List<MonTienQuyet>> response) {
                 //Toast.makeText(DKHP.this, "Kiểm tra môn Tiên Quyết "+ response.body().size(), Toast.LENGTH_SHORT).show();
-
                 ktmtq = response.body().size();
             }
             @Override
@@ -388,15 +543,15 @@ public class DKHP extends AppCompatActivity {
             }
         });
     }
-    //-----------------Kiểm Tra lịch học bị trùng---------------------------------------------------//
-    public void getKiemTraTrungLichHoc() {
+//-----------------Kiểm Tra lịch học bị trùng---------------------------------------------------//
+    public void getKiemTraTrungLichHocLT() {
 
-        ApiService.apiService.getKiemTraTrungLichHoc("0001",1, namkt,lhp, nhomltvsth ).enqueue(new Callback<List<KiemTraLichHoc>>() {
+        ApiService.apiService.getKiemTraTrungLichHoc(mssv,Integer.parseInt(hocky_spinner.getSelectedItem().toString()), String.valueOf(nam_spinner.getSelectedItem()),lhp, nhomlt ).enqueue(new Callback<List<KiemTraLichHoc>>() {
 
             @Override
             public void onResponse(Call<List<KiemTraLichHoc>> call, Response<List<KiemTraLichHoc>> response) {
                 //Toast.makeText(DKHP.this, "Kiểm tra lich hoc ", Toast.LENGTH_SHORT).show();
-                    kiemTraLH = response.body().size();
+                    kiemTraLT = response.body().size();
 
             }
             @Override
@@ -405,17 +560,36 @@ public class DKHP extends AppCompatActivity {
             }
         });
     }
+    public void getKiemTraTrungLichHocTH() {
+
+        ApiService.apiService.getKiemTraTrungLichHoc(mssv,Integer.parseInt(hocky_spinner.getSelectedItem().toString()), String.valueOf(nam_spinner.getSelectedItem()),lhp, nhomth ).enqueue(new Callback<List<KiemTraLichHoc>>() {
+            @Override
+            public void onResponse(Call<List<KiemTraLichHoc>> call, Response<List<KiemTraLichHoc>> response) {
+                //Toast.makeText(DKHP.this, "Kiểm tra lich hoc ", Toast.LENGTH_SHORT).show();
+                kiemTraTH = response.body().size();
+
+            }
+            @Override
+            public void onFailure(Call<List<KiemTraLichHoc>> call, Throwable t) {
+                Toast.makeText(DKHP.this, "Call api error LHP", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void getDSLopHocPhanLT() {
         ApiService.apiService.getDSLopHocPhanLT(lhp).enqueue(new Callback<List<LopHocPhanLT>>() {
-
             @Override
             public void onResponse(Call<List<LopHocPhanLT>> call, Response<List<LopHocPhanLT>> response) {
                 //Toast.makeText(DKHP.this, "LyThuyet va ThucHanh "+ response.body().size(), Toast.LENGTH_SHORT).show();
+                slLT = response.body().size();
                 lopHocPhanLTList = response.body();
-                adtLHPLTTH.notifyDataSetChanged();
-                if (lopHocPhanLTList != null) {
-                    adtLHPLTTH.setLopHocPhanLTvsTHs((ArrayList<LopHocPhanLT>) lopHocPhanLTList);
+                if (response.isSuccessful()){
+                    adtLT.notifyDataSetChanged();
+                    if (lopHocPhanLTList != null) {
+                        adtLT.setLopHocPhanLTvsTHs((ArrayList<LopHocPhanLT>) lopHocPhanLTList);
+                        progressBarLT.setVisibility(View.GONE);
 
+                    }
                 }
             }
             @Override
@@ -426,14 +600,18 @@ public class DKHP extends AppCompatActivity {
     }
     public void getDSLopHocPhanTH() {
         ApiService.apiService.getDSLopHocPhanTH(lhp).enqueue(new Callback<List<LopHocPhanTH>>() {
-
             @Override
             public void onResponse(Call<List<LopHocPhanTH>> call, Response<List<LopHocPhanTH>> response) {
                 //Toast.makeText(DKHP.this, "LyThuyet va ThucHanh "+ response.body().size(), Toast.LENGTH_SHORT).show();
+                slTH = response.body().size();
                 lopHocPhanTHList = response.body();
-                if (lopHocPhanTHList != null) {
-                    adtTH.setLopHocPhanTHs((ArrayList<LopHocPhanTH>) lopHocPhanTHList);
+                if (response.isSuccessful()){
+                    if (lopHocPhanTHList != null) {
+                        adtTH.setLopHocPhanTHs((ArrayList<LopHocPhanTH>) lopHocPhanTHList);
+                        progressBarTH.setVisibility(View.GONE);
+                    }
                 }
+
             }
             @Override
             public void onFailure(Call<List<LopHocPhanTH>> call, Throwable t) {
@@ -443,13 +621,13 @@ public class DKHP extends AppCompatActivity {
     }
 
     public void getDSLopHocPhanDDK() {
-        ApiService.apiService.getDSLopHocPhanDDK("0001", Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString()).enqueue(new Callback<List<LHPDaDangKy>>() {
+        ApiService.apiService.getDSLopHocPhanDDK(mssv, Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString()).enqueue(new Callback<List<LHPDaDangKy>>() {
             @Override
             public void onResponse(Call<List<LHPDaDangKy>> call, Response<List<LHPDaDangKy>> response) {
                 //Toast.makeText(DKHP.this, "Mon hoc phan "+ response.body().size(), Toast.LENGTH_SHORT).show();
 
                 lhpDaDangKyList = response.body();
-                int ddk = response.body().size();
+                adtLHPDDK.notifyDataSetChanged();
                 if (lhpDaDangKyList != null) {
                     adtLHPDDK.setLhpDaDangKys((ArrayList<LHPDaDangKy>) lhpDaDangKyList);
                 }
@@ -461,13 +639,29 @@ public class DKHP extends AppCompatActivity {
         });
     }
 
-    public void postDKHP() {
-        ApiService.apiService.dkhp("0001", lhp, nhomltvsth).enqueue(new Callback<DKHPSV>() {
+    public void postDKHPLT() {
+        ApiService.apiService.dkhpLT(mssv, lhp, nhomlt).enqueue(new Callback<DKHPSV>() {
 
             @Override
             public void onResponse(Call<DKHPSV> call, Response<DKHPSV> response) {
-                Toast.makeText(DKHP.this, "DKHP success!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DKHP.this, "DKHP LT thành công!!!", Toast.LENGTH_SHORT).show();
+                getDSMonHocPhan();
+                getDSLopHocPhanDDK();
+            }
+            @Override
+            public void onFailure(Call<DKHPSV> call, Throwable t) {
+                Toast.makeText(DKHP.this, "Call api error DKHP", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void postDKHPTH() {
+        ApiService.apiService.dkhpTH(mssv, lhp, nhomth).enqueue(new Callback<DKHPSV>() {
 
+            @Override
+            public void onResponse(Call<DKHPSV> call, Response<DKHPSV> response) {
+                Toast.makeText(DKHP.this, "DKHP TH thành công!!!", Toast.LENGTH_SHORT).show();
+                getDSMonHocPhan();
+                getDSLopHocPhanDDK();
             }
             @Override
             public void onFailure(Call<DKHPSV> call, Throwable t) {
@@ -477,7 +671,6 @@ public class DKHP extends AppCompatActivity {
     }
     public void updateSLSVDKHP() {
         ApiService.apiService.updateSLSVDKHP( slDDK + 1, lhp).enqueue(new Callback<SLDaDangKy>() {
-
             @Override
             public void onResponse(Call<SLDaDangKy> call, Response<SLDaDangKy> response) {
                 //Toast.makeText(DKHP.this, "Call api success!!!", Toast.LENGTH_SHORT).show();
@@ -490,12 +683,11 @@ public class DKHP extends AppCompatActivity {
         });
     }
     public void updateLHPDDK() {
-        ApiService.apiService.updateSLSVDKHP( slDDK-1, lhpddk).enqueue(new Callback<SLDaDangKy>() {
+        ApiService.apiService.updateSLSVDKHP( ddk-1, lhpddk).enqueue(new Callback<SLDaDangKy>() {
 
             @Override
             public void onResponse(Call<SLDaDangKy> call, Response<SLDaDangKy> response) {
-                Toast.makeText(DKHP.this, "Call api success!!!", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(DKHP.this, "Call api success!!!", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<SLDaDangKy> call, Throwable t) {
@@ -504,16 +696,52 @@ public class DKHP extends AppCompatActivity {
         });
     }
     public void deleteLHPDDK() {
-        ApiService.apiService.deleteLHPDDK("0001", lhpddk).enqueue(new Callback<DeleteLHPDDK>() {
-
+        ApiService.apiService.deleteLHPDDK(mssv, lhpddk).enqueue(new Callback<DeleteLHPDDK>() {
             @Override
             public void onResponse(Call<DeleteLHPDDK> call, Response<DeleteLHPDDK> response) {
-                Toast.makeText(DKHP.this, "delete success!!!"+ lhpddk, Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(DKHP.this, "hủy lớp thành công!!!"+ lhpddk, Toast.LENGTH_SHORT).show();
+                    getDSMonHocPhan();
+                    getDSLopHocPhanDDK();
+                    progressBarDelete.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<DeleteLHPDDK> call, Throwable t) {
                 Toast.makeText(DKHP.this, "Call api error DKHP", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void getNamHoc() {
+        ApiService.apiService.getNamHocs().enqueue(new Callback<List<NamHoc>>() {
+            @Override
+            public void onResponse(Call<List<NamHoc>> call, Response<List<NamHoc>> response) {
+                namHocList = response.body();
+                Toast.makeText(DKHP.this, "Size Nam hoc"+ response.body().size(), Toast.LENGTH_SHORT).show();
+
+                String khoahocTach = InfoStudent.khoahocchung.substring(0,4);
+                Log.d("Khoa hoc Tach", khoahocTach);
+                int vitri = 0;
+                for (int i = 0; i < namHocList.size(); i++) {
+                    String namhocs = namHocList.get(i).getNam();
+                    //Log.d("Nam hoc", namhocs);
+                    String tachnam  = namhocs.substring(0, 4);
+                    Log.d("Nam sau khi cat", tachnam);
+                    if(khoahocTach.equals(tachnam)){
+                        vitri = i;
+                        Log.d("vitri",vitri+"");
+                    }
+                }
+                for (int j = vitri; j<vitri+4; j++ ){
+
+                    listNam.add(namHocList.get(j).getNam()+"");
+                    Log.d("dasdasdasd : ", listNam+"");
+                    //namdung = namHocList.get(j).getNam().toCharArray();
+
+                }
+                adapternam.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<NamHoc>> call, Throwable t) {
+                Toast.makeText(DKHP.this, "Call api error LHP", Toast.LENGTH_SHORT).show();
             }
         });
     }

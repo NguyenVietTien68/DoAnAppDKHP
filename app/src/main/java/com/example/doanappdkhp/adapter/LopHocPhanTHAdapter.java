@@ -8,12 +8,14 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanappdkhp.R;
 import com.example.doanappdkhp.entity.LopHocPhanTH;
+import com.example.doanappdkhp.gui.DKHP;
 import com.example.doanappdkhp.my_interface.IClickItemLHPTH;
 
 import java.text.DateFormat;
@@ -54,19 +56,21 @@ public class LopHocPhanTHAdapter extends RecyclerView.Adapter<LopHocPhanTHAdapte
         holder.tvTietHoc.setText(lopHocPhanTH.getTietHoc());
         holder.tvMaNhom.setText(lopHocPhanTH.getMaNhom());
         holder.tvNgayBatDau.setText(DateFormat.getDateInstance().format(lopHocPhanTH.getNgayBatDau()));
-
+        holder.rdoButton.clearFocus();
         holder.rdoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (check) {
                     holder.rdoButton.setChecked(false);
                     check = false;
-
+                    DKHP.nhomth = "";
+                    Toast.makeText(mcontext.getApplicationContext(), "Chưa chọn nhóm TH", Toast.LENGTH_SHORT).show();
                     //write code for when button is unchecked
                 } else {
                     check = true;
                     holder.rdoButton.setChecked(true);
-
+                    DKHP.nhomth = DKHP.nhomth;
                     //write code for when button is checked
                 }
             }
@@ -78,6 +82,8 @@ public class LopHocPhanTHAdapter extends RecyclerView.Adapter<LopHocPhanTHAdapte
                 if (isChecked ){
                     selectedPosition = holder.getAdapterPosition();
                     iClickItemLHPTH.onClickItemTH(lopHocPhanTH);
+
+                }else {
                 }
 
             }

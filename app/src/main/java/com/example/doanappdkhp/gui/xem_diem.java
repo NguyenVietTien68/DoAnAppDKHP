@@ -1,5 +1,7 @@
 package com.example.doanappdkhp.gui;
 
+import static com.example.doanappdkhp.MainActivity.mssv;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.doanappdkhp.MainActivity;
@@ -33,12 +37,14 @@ public class xem_diem extends AppCompatActivity {
     DiemAdapter adt;
     String value1;
     TaiKhoanSV taiKhoanSV;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xem_diem);
 
-
+        progressBar = findViewById(R.id.progressBarDiem);
+        progressBar.setVisibility(View.VISIBLE);
         rcv = findViewById(R.id.rcv_Diem);
         diemList = new ArrayList<>();
         adt = new DiemAdapter(getApplicationContext(), (ArrayList<Diem>) diemList);
@@ -52,13 +58,14 @@ public class xem_diem extends AppCompatActivity {
 
     private void getDiem() {
 
-        ApiService.apiService.getDiemTheoMSSV("0001").enqueue(new Callback<List<Diem>>() {
+        ApiService.apiService.getDiemTheoMSSV(mssv).enqueue(new Callback<List<Diem>>() {
             @Override
             public void onResponse(Call<List<Diem>> call, Response<List<Diem>> response) {
                  Toast.makeText(xem_diem.this, "Call api success!!!"+ response.body().size(), Toast.LENGTH_SHORT).show();
                 diemList = response.body();
                 if (diemList != null) {
                 adt.setDiems((ArrayList<Diem>) diemList);
+                progressBar.setVisibility(View.GONE);
                 }
             }
             @Override

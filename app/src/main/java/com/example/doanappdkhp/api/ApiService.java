@@ -8,6 +8,7 @@ import com.example.doanappdkhp.entity.KiemTraLichHoc;
 import com.example.doanappdkhp.entity.LHPDaDangKy;
 import com.example.doanappdkhp.entity.LopHocPhanTH;
 import com.example.doanappdkhp.entity.MonTienQuyet;
+import com.example.doanappdkhp.entity.NamHoc;
 import com.example.doanappdkhp.entity.SLDaDangKy;
 import com.example.doanappdkhp.entity.Diem;
 import com.example.doanappdkhp.entity.LichHoc;
@@ -52,6 +53,9 @@ public interface ApiService {
     @GET("sinhvien/{mssv}")
     Call<List<Sinhvien>> getSinhVienTheoMSSV(@Path("mssv") String groupId);
 
+    @GET("namhoc")
+    Call<List<NamHoc>> getNamHocs();
+
     @GET("laydiem/{mssv}")
     Call<List<Diem>> getDiemTheoMSSV(@Path("mssv") String gruopId);
 
@@ -71,6 +75,9 @@ public interface ApiService {
                                       @Path("hocky") int hocky,
                                       @Path("nam") String nam);
 
+    @GET("laylhp/{malhp}")
+    Call<List<LopHocPhan>> getLopHocPhan(@Path("malhp") String groupId);
+
     @GET("laydslhp/{mamhp}")
     Call<List<LopHocPhan>> getDSLopHocPhan(@Path("mamhp") String groupId);
 
@@ -85,17 +92,21 @@ public interface ApiService {
                                             @Path("hocky") int hocky,
                                             @Path("nam") String nam);
 
-    @POST("dkhp")
-    Call<DKHPSV> dkhp(@Query("MSSV") String mssv,
+    @POST("dkhplt")
+    Call<DKHPSV> dkhpLT(@Query("MSSV") String mssv,
                             @Query("MaLopHP") String malhp,
                             @Query("Nhom") String nhom);
+    @POST("dkhpth")
+    Call<DKHPSV> dkhpTH(@Query("MSSV") String mssv,
+                      @Query("MaLopHP") String malhp,
+                      @Query("Nhom") String nhom);
     @POST("updatesoluongsvdk")
     Call<SLDaDangKy> updateSLSVDKHP(@Query("DaDangKy") int dadangky,
                                     @Query("MaLopHP") String malhp);
     @DELETE("deletelhpddk/{mssv}/{malhp}")
     Call<DeleteLHPDDK> deleteLHPDDK(@Path("mssv") String mssv,
                                       @Path("malhp") String malhp);
-//--------Lấy môn tiên quyết
+//--------Lấy môn tiên quyết-----------------------------------//
     @GET("laymontienquyet/{malhp}")
     Call<List<MonTienQuyet>> getMonTienQuyet(@Path("malhp") String malhp);
 

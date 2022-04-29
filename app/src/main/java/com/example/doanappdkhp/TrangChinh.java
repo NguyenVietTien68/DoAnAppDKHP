@@ -33,7 +33,6 @@ public class TrangChinh extends AppCompatActivity {
 //        Intent intent = getIntent();
 //        Bundle bundle = intent.getExtras();
 //        TaiKhoanSV tk1 = (TaiKhoanSV) bundle.getSerializable("mssv");
-
         //tvId.setText(value1);
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -59,7 +58,6 @@ public class TrangChinh extends AppCompatActivity {
                         break;
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -78,11 +76,8 @@ public class TrangChinh extends AppCompatActivity {
                         viewPager.setCurrentItem(1);
                         break;
                 }
-
                 return true;
             }
         });
-
-
     }
 }

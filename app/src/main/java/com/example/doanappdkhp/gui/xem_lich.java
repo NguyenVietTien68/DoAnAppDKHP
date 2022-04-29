@@ -1,5 +1,7 @@
 package com.example.doanappdkhp.gui;
 
+import static com.example.doanappdkhp.MainActivity.mssv;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,13 +38,15 @@ public class xem_lich extends AppCompatActivity {
     List<LichHoc> lichHocList;
     RecyclerView rcv;
     LichHocAdapter adt;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xem_lich);
 
 
+        progressBar = findViewById(R.id.progressBarLich);
+        progressBar.setVisibility(View.GONE);
         rcv = findViewById(R.id.rcv_lichHoc);
         lichHocList = new ArrayList<>();
         adt = new LichHocAdapter(getApplicationContext(), (ArrayList<LichHoc>) lichHocList);
@@ -68,6 +73,7 @@ public class xem_lich extends AppCompatActivity {
         btnGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
 //                txtTest.setText(nam_spinner.getSelectedItem().toString());
                 getLichHoc();
             }
@@ -75,7 +81,7 @@ public class xem_lich extends AppCompatActivity {
     }
 
     private void getLichHoc() {
-        ApiService.apiService.getLichHoc(Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString(),"0001").enqueue(new Callback<List<LichHoc>>() {
+        ApiService.apiService.getLichHoc(Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString(),mssv).enqueue(new Callback<List<LichHoc>>() {
 
             @Override
             public void onResponse(Call<List<LichHoc>> call, Response<List<LichHoc>> response) {
@@ -83,7 +89,7 @@ public class xem_lich extends AppCompatActivity {
                 lichHocList = response.body();
                 if (lichHocList != null) {
                     adt.setLichHocs((ArrayList<LichHoc>) lichHocList);
-
+                    progressBar.setVisibility(View.GONE);
                 }
             }
             @Override

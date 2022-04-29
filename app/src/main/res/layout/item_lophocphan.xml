@@ -146,6 +146,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+        android:textColorLink="@color/black"
+        android:backgroundTint="@color/blue"
         android:id="@+id/btnChonLHP"
         android:layout_width="80dp"
         android:layout_height="68dp"

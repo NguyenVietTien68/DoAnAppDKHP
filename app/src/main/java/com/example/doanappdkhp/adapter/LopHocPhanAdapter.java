@@ -1,6 +1,12 @@
 package com.example.doanappdkhp.adapter;
 
+import static com.example.doanappdkhp.adapter.LopHocPhanLTAdapter.ThingViewHolder.rdoButtonLT;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +31,7 @@ public class LopHocPhanAdapter extends RecyclerView.Adapter<LopHocPhanAdapter.Th
     private ArrayList<LopHocPhan> lopHocPhans;
     private ICLickItemLHP iClickItemLHP;
     boolean check =false;
+    int color = -1;
     int selectedPosition = -1;
     public LopHocPhanAdapter(Context mcontext, ArrayList<LopHocPhan> lopHocPhans, ICLickItemLHP listener) {
         this.mcontext = mcontext;
@@ -43,27 +51,50 @@ public class LopHocPhanAdapter extends RecyclerView.Adapter<LopHocPhanAdapter.Th
         return new LopHocPhanAdapter.ThingViewHolder(mItemView);
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull LopHocPhanAdapter.ThingViewHolder holder, int position) {
         LopHocPhan lopHocPhan = lopHocPhans.get(position);
         holder.tvMaLopHP.setText(lopHocPhan.getMaLopHP());
         holder.tvSiSo.setText(String.valueOf(lopHocPhan.getSiSo()));
         holder.tvSLDaDangKy.setText(String.valueOf(lopHocPhan.getDaDangKy()));
-        if(lopHocPhan.getSiSo() > lopHocPhan.getDaDangKy()){
+        if(lopHocPhan.getDaDangKy() < (0.666666667 * lopHocPhan.getSiSo())){
             holder.tvTinhTrang.setText("Chờ đăng ký");
-        }else if(lopHocPhan.getSiSo() == lopHocPhan.getDaDangKy()){
+        }else{
             holder.tvTinhTrang.setText("Chấp nhận mở lớp");
         }
+        //holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(position = color));
+
         holder.btnChonMaLHP.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
+                //color = holder.getAdapterPosition();
                 iClickItemLHP.onClickItemLHP(lopHocPhan);
+                //holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                notifyDataSetChanged();
+
                 //selectedPosition = holder.getAdapterPosition();
+//                if (color == color){
+//                    holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+//                }else{
+//                    holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
+//                }
+
             }
         });
 
+    }
+    @Override
+    public long getItemId(int position) {
+        //pass position
+        return position;
+    }
 
-
+    @Override
+    public int getItemViewType(int position) {
+        //pass position
+        return position;
     }
 
     @Override
@@ -74,7 +105,6 @@ public class LopHocPhanAdapter extends RecyclerView.Adapter<LopHocPhanAdapter.Th
     public class ThingViewHolder extends RecyclerView.ViewHolder {
         TextView tvMaLopHP, tvSiSo, tvSLDaDangKy, tvTinhTrang;
         Button btnChonMaLHP;
-
         public ThingViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMaLopHP = itemView.findViewById(R.id.tv_MaLopHPDKHP);
