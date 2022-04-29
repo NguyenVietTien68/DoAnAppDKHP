@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gui.doi_matkhau">
+
+    <EditText
+        android:id="@+id/editTextMatKhauMoiLai"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Nhập lại mật khẩu mới"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauMoi"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauMoi"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauMoi" />
+
+    <EditText
+        android:id="@+id/editTextMatKhauMoi"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Mật khẩu mới"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauCu"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauCu"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauCu" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#DA0380B8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="231dp"
+        android:layout_height="52dp"
+        android:text="Đổi mật khẩu"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toTopOf="@+id/view6" />
+
+    <EditText
+        android:id="@+id/editTextMatKhauCu"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:hint="Mật khẩu cũ"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+    <Button
+        android:id="@+id/btnDoiMK"
+        android:layout_width="251dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="104dp"
+        android:text="đổi mật khẩu"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFEB3B"
+        app:backgroundTint="#DA0380B8"
+        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauMoiLai"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauMoiLai"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauMoiLai" />
+
+    <TextView
+        android:id="@+id/txtBaoLoiDoiMK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnDoiMK"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/btnDoiMK"
+        app:layout_constraintTop_toBottomOf="@+id/btnDoiMK" />
+</androidx.constraintlayout.widget.ConstraintLayout>

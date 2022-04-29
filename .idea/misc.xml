@@ -3,21 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable-anydpi/ic_dkhp.xml" value="0.19907407407407407" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bo_tron.xml" value="0.236986301369863" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc.xml" value="0.2703125" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc_dang_nhap.xml" value="0.19907407407407407" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/bogoc_trang_chinh.xml" value="0.26927083333333335" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/custom_input.xml" value="0.2703125" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/drawable/custom_view_ten.xml" value="0.2703125" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/activity_main.xml" value="0.176" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/activity_test_connect_mys_sql.xml" value="0.10371376811594203" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/activity_trang_chinh.xml" value="0.264" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_info_student.xml" value="0.264" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_main__form.xml" value="0.10975609756097561" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/layout/fragment_main_form.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/menu/bottom_menu.xml" value="0.22592592592592592" />
-        <entry key="..\:/Users/LAPTOP/Desktop/HK2-Nam4/DoAn/DoAnAppDKHP/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.236986301369863" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_dkhp.xml" value="0.25" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_doi_matkhau.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_test.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_test_connect_mys_sql.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_trang_chinh.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_xem_congno.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_xem_ctkhung.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_xem_diem.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/activity_xem_lich.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/fragment_info_student.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/fragment_main_form.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_congno.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_ctkhung.xml" value="0.5" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_diem.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lhpddk.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lhpth.xml" value="0.20416666666666666" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lichhoc.xml" value="0.41974248927038627" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lophocphan.xml" value="0.5" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lophocphanltvsth.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_lophocphanth.xml" value="0.67" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/layout/item_monhocphan.xml" value="0.33" />
+        <entry key="..\:/01_Nam4_HK2/KLTN/DoAnAppDKHP/app/src/main/res/menu/bottom_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/DoAnAppDKHP/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>
   </component>
