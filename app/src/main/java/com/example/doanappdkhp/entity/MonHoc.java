@@ -1,12 +1,10 @@
 package com.example.doanappdkhp.entity;
 
-public class CongNo {
+public class MonHoc {
     String TenMHHP;
-    int SoTinChi;
 
-    public CongNo(String tenMHHP, int soTinChi) {
+    public MonHoc(String tenMHHP) {
         TenMHHP = tenMHHP;
-        SoTinChi = soTinChi;
     }
 
     public String getTenMHHP() {
@@ -17,19 +15,10 @@ public class CongNo {
         TenMHHP = tenMHHP;
     }
 
-    public int getSoTinChi() {
-        return SoTinChi;
-    }
-
-    public void setSoTinChi(int soTinChi) {
-        SoTinChi = soTinChi;
-    }
-
     @Override
     public String toString() {
-        return "CongNo{" +
+        return "MonHoc{" +
                 "TenMHHP='" + TenMHHP + '\'' +
-                ", SoTinChi=" + SoTinChi +
                 '}';
     }
 }

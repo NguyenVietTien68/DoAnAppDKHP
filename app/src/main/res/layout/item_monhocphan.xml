@@ -20,12 +20,13 @@
 
     <TextView
         android:id="@+id/tv_TenMHHPDKHP"
-        android:layout_width="255dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:text="TextView"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/textView28"
+        app:layout_constraintEnd_toStartOf="@+id/view18"
         app:layout_constraintStart_toEndOf="@+id/textView28"
         app:layout_constraintTop_toTopOf="@+id/textView28"
         app:layout_constraintVertical_bias="0.0" />
@@ -71,12 +72,11 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:text="Tên môn:"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,20 +84,20 @@
         android:id="@+id/textView41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Mã môn:"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView28"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_TenMHHPDKHP" />
 
     <TextView
         android:id="@+id/textView42"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Học phần yêu cầu:"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -132,29 +132,21 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <View
-        android:id="@+id/view32"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
         android:id="@+id/view40"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="12dp"
         android:background="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
     <View
         android:id="@+id/view61"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="6dp"
         android:background="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -162,42 +154,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view45"
-        android:layout_width="2dp"
-        android:layout_height="120dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toTopOf="@+id/view40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view46"
-        android:layout_width="2dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="60dp"
-        android:background="#2196F3"
+        android:id="@+id/view18"
+        android:layout_width="78dp"
+        android:layout_height="0dp"
+        android:background="#00a856"
         app:layout_constraintBottom_toTopOf="@+id/view40"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <View
-        android:id="@+id/view60"
-        android:layout_width="2dp"
-        android:layout_height="120dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toTopOf="@+id/view40"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_STCDKHP"
+        app:layout_constraintTop_toBottomOf="@+id/view61"
         app:layout_constraintVertical_bias="0.0" />
 
     <RadioButton
         android:id="@+id/radioButtonMHP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/view60"
-        app:layout_constraintStart_toEndOf="@+id/view46"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="33dp"
+        android:layout_height="39dp"
+        android:background="@android:color/transparent"
+        android:buttonTint="@color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/view18"
+        app:layout_constraintEnd_toEndOf="@+id/view18"
+        app:layout_constraintStart_toStartOf="@+id/view18"
+        app:layout_constraintTop_toTopOf="@+id/view18"
+        app:layout_constraintVertical_bias="0.514" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

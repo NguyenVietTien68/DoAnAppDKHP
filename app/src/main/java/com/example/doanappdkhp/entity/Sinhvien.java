@@ -1,5 +1,7 @@
 package com.example.doanappdkhp.entity;
 
+import android.widget.TextView;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -9,11 +11,40 @@ public class Sinhvien {
     String HoTen;
     String GioiTinh;
     Date NgaySinh;
+    long NgaySinhTime;
     String SoDT;
     String KhoaHoc;
     String imageSV;
+//Expected BEGIN_ARRAY but was BEGIN_OBJECT at line 1 column 2 path $
+    public Sinhvien(String MSSV, String diaChi, String hoTen,  long ngaySinhTime, String gioiTinh, Date ngaySinh, String soDT, String khoaHoc) {
+        this.MSSV = MSSV;
+        DiaChi = diaChi;
+        HoTen = hoTen;
+        GioiTinh = gioiTinh;
+        NgaySinh = ngaySinh;
+        NgaySinhTime = ngaySinhTime;
+        SoDT = soDT;
+        KhoaHoc = khoaHoc;
+//        this.imageSV = imageSV;
+    }
 
+    public long getNgaySinhTime() {
+        return NgaySinhTime;
+    }
 
+    public void setNgaySinhTime(long ngaySinhTime) {
+        NgaySinhTime = ngaySinhTime;
+    }
+
+    public Sinhvien(String MSSV, String diaChi, String hoTen, String gioiTinh, Date ngaySinh, String soDT, String khoaHoc) {
+        this.MSSV = MSSV;
+        DiaChi = diaChi;
+        HoTen = hoTen;
+        GioiTinh = gioiTinh;
+        NgaySinh = ngaySinh;
+        SoDT = soDT;
+        KhoaHoc = khoaHoc;
+    }
 
     public String getMSSV() {
         return MSSV;
@@ -80,4 +111,17 @@ public class Sinhvien {
     }
 
 
+
+    @Override
+    public String toString() {
+        return "Sinhvien{" +
+                "MSSV='" + MSSV + '\'' +
+                ", DiaChi='" + DiaChi + '\'' +
+                ", HoTen='" + HoTen + '\'' +
+                ", GioiTinh='" + GioiTinh + '\'' +
+                ", NgaySinh=" + NgaySinh +
+                ", SoDT='" + SoDT + '\'' +
+                ", KhoaHoc='" + KhoaHoc + '\'' +
+                '}';
+    }
 }

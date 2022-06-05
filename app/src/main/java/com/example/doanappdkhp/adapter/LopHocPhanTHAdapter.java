@@ -1,6 +1,9 @@
 package com.example.doanappdkhp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +61,7 @@ public class LopHocPhanTHAdapter extends RecyclerView.Adapter<LopHocPhanTHAdapte
         holder.tvNgayBatDau.setText(DateFormat.getDateInstance().format(lopHocPhanTH.getNgayBatDau()));
         holder.rdoButton.clearFocus();
         holder.rdoButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
 
@@ -65,12 +69,15 @@ public class LopHocPhanTHAdapter extends RecyclerView.Adapter<LopHocPhanTHAdapte
                     holder.rdoButton.setChecked(false);
                     check = false;
                     DKHP.nhomth = "";
+                    DKHP.btnDKHP.setEnabled(false);
                     Toast.makeText(mcontext.getApplicationContext(), "Chưa chọn nhóm TH", Toast.LENGTH_SHORT).show();
                     //write code for when button is unchecked
                 } else {
                     check = true;
                     holder.rdoButton.setChecked(true);
                     DKHP.nhomth = DKHP.nhomth;
+                    DKHP.btnDKHP.setEnabled(true);
+                    DKHP.btnDKHP.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255,124,0)));
                     //write code for when button is checked
                 }
             }
@@ -83,9 +90,7 @@ public class LopHocPhanTHAdapter extends RecyclerView.Adapter<LopHocPhanTHAdapte
                     selectedPosition = holder.getAdapterPosition();
                     iClickItemLHPTH.onClickItemTH(lopHocPhanTH);
 
-                }else {
                 }
-
             }
         });
     }

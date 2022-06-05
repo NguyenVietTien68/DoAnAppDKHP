@@ -41,7 +41,7 @@ public class CTKhungAdapter extends RecyclerView.Adapter<CTKhungAdapter.ThingVie
         CTKhung ctKhung = ctKhungs.get(position);
         holder.tvMaMHP.setText(ctKhung.getMaMHP());
         holder.tvTenMHHP.setText(ctKhung.getTenMHHP());
-        holder.tvHocKy.setText(String.valueOf(ctKhung.getHocKy()));
+        holder.tvSTC.setText(String.valueOf(ctKhung.getSoTinChi()));
     }
 
     @Override
@@ -50,13 +50,12 @@ public class CTKhungAdapter extends RecyclerView.Adapter<CTKhungAdapter.ThingVie
     }
 
     public class ThingViewHolder extends RecyclerView.ViewHolder {
-        TextView tvMaMHP, tvTenMHHP, tvHocKy;
-
+        TextView tvMaMHP, tvTenMHHP, tvSTC;
         public ThingViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvHocKy  = itemView.findViewById(R.id.tv_HocKyCTK);
             tvMaMHP = itemView.findViewById(R.id.tv_MaMHPCTK);
             tvTenMHHP = itemView.findViewById(R.id.tv_TenMHHPCTK);
+            tvSTC = itemView.findViewById(R.id.tv_STC_CTK);
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.example.doanappdkhp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +45,7 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
     @NonNull
     @Override
     public LopHocPhanLTAdapter.ThingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = layoutInflater.from(parent.getContext()).inflate(R.layout.item_lophocphanltvsth, parent, false);
+        View mItemView = layoutInflater.from(parent.getContext()).inflate(R.layout.item_lophocphanlt, parent, false);
         return new LopHocPhanLTAdapter.ThingViewHolder(mItemView);
     }
 
@@ -63,13 +66,17 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
 //            }
 //        });
         //holder.rdoButton.setChecked(false);
+        holder.rdoButtonLT.setChecked(position == selectedPosition);
         holder.rdoButtonLT.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
+
                 if (check) {
-                    holder.rdoButtonLT.setChecked(false);
                     check = false;
+                    holder.rdoButtonLT.setChecked(false);
                     DKHP.nhomlt = "";
+
                     Toast.makeText(mcontext.getApplicationContext(), "Chưa chọn lớp LT", Toast.LENGTH_SHORT).show();
                     //write code for when button is unchecked
                 } else {
@@ -77,17 +84,23 @@ public class LopHocPhanLTAdapter extends RecyclerView.Adapter<LopHocPhanLTAdapte
                     holder.rdoButtonLT.setChecked(true);
                     DKHP.nhomlt = DKHP.nhomlt;
 
+                    DKHP.btnDKHP.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255,124,0)));
                     //write code for when button is checked
                 }
             }
         });
-        holder.rdoButtonLT.setChecked(position == selectedPosition);
+        //holder.rdoButtonLT.setChecked(false);
+
         holder.rdoButtonLT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked ){
                     selectedPosition = holder.getAdapterPosition();
                     iClickItemNhomLT.onClickItemNhomLTvsTH(lopHocPhanLT);
+                    DKHP.btnDKHP.setEnabled(true);
+                }else{
+                    selectedPosition = holder.getAdapterPosition();
+                    DKHP.btnDKHP.setEnabled(false);
                 }
                 //notifyDataSetChanged();
             }

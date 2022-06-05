@@ -4,20 +4,13 @@ public class CTKhung {
     String TenChuyenNganh;
     String MaMHP;
     String TenMHHP;
-    int HocKy;
+    int SoTinChi;
 
-    public CTKhung(String tenChuyenNganh, String maMHP, String tenMHHP, int hocKy) {
+    public CTKhung(String tenChuyenNganh, String maMHP, String tenMHHP, int soTinChi) {
         TenChuyenNganh = tenChuyenNganh;
         MaMHP = maMHP;
         TenMHHP = tenMHHP;
-        HocKy = hocKy;
-    }
-
-
-    public CTKhung(String maMHP, String tenMHHP, int hocKy) {
-        MaMHP = maMHP;
-        TenMHHP = tenMHHP;
-        HocKy = hocKy;
+        SoTinChi = soTinChi;
     }
 
     public String getTenChuyenNganh() {
@@ -44,12 +37,12 @@ public class CTKhung {
         TenMHHP = tenMHHP;
     }
 
-    public int getHocKy() {
-        return HocKy;
+    public int getSoTinChi() {
+        return SoTinChi;
     }
 
-    public void setHocKy(int hocKy) {
-        HocKy = hocKy;
+    public void setSoTinChi(int soTinChi) {
+        SoTinChi = soTinChi;
     }
 
     @Override
@@ -58,7 +51,7 @@ public class CTKhung {
                 "TenChuyenNganh='" + TenChuyenNganh + '\'' +
                 ", MaMHP='" + MaMHP + '\'' +
                 ", TenMHHP='" + TenMHHP + '\'' +
-                ", HocKy=" + HocKy +
+                ", SoTinChi=" + SoTinChi +
                 '}';
     }
 }

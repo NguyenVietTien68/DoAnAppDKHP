@@ -1,7 +1,10 @@
 package com.example.doanappdkhp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,6 +34,8 @@ public class MonHocPhanAdapter extends RecyclerView.Adapter<MonHocPhanAdapter.Th
     private ArrayList<MonHocPhan> monHocPhans;
     private IClickItemMHP iClickItemMHP;
     int selectedPosition = -1;
+    boolean check = false;
+
     public MonHocPhanAdapter(Context mcontext, ArrayList<MonHocPhan> monHocPhans,IClickItemMHP listener ) {
         this.mcontext = mcontext;
         this.monHocPhans = monHocPhans;
@@ -58,8 +64,26 @@ public class MonHocPhanAdapter extends RecyclerView.Adapter<MonHocPhanAdapter.Th
         holder.tvBatBuoc.setText(monHocPhan.getBatBuoc());
         String a = monHocPhan.getMaMHP();
 
-        holder.rdoButton.setChecked(position == selectedPosition);
-        holder.rdoButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.rdoButtonMHP.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View v) {
+                if (check) {
+                    holder.rdoButtonMHP.setChecked(false);
+                    check = false;
+                    DKHP.mhp = "";
+
+                    //write code for when button is unchecked
+                } else {
+                    check = true;
+                    holder.rdoButtonMHP.setChecked(true);
+
+                    //write code for when button is checked
+                }
+            }
+        });
+        holder.rdoButtonMHP.setChecked(position == selectedPosition);
+        holder.rdoButtonMHP.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked ){
@@ -84,8 +108,8 @@ public class MonHocPhanAdapter extends RecyclerView.Adapter<MonHocPhanAdapter.Th
 
     public class ThingViewHolder extends RecyclerView.ViewHolder {
         TextView tvTenMHHP, tvMaMonHP, tvSoTinChi, tvHPYeuCau, tvBatBuoc;
-        RadioButton rdoButton;
-        Button btnChon;
+        RadioButton rdoButtonMHP;
+         Button btnChon;
         ConstraintLayout constraintLayout;
         public ThingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,7 +119,7 @@ public class MonHocPhanAdapter extends RecyclerView.Adapter<MonHocPhanAdapter.Th
             tvHPYeuCau = itemView.findViewById(R.id.tv_HocPhanYeuCauDKHP);
             tvBatBuoc = itemView.findViewById(R.id.tv_BatBuocDKHP);
             constraintLayout = itemView.findViewById(R.id.conStranlayoutMHP);
-            rdoButton = itemView.findViewById(R.id.radioButtonMHP);
+            rdoButtonMHP = itemView.findViewById(R.id.radioButtonMHP);
         }
     }
 }
