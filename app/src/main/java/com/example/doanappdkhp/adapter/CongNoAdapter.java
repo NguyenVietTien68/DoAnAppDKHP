@@ -45,8 +45,6 @@ public class CongNoAdapter extends RecyclerView.Adapter<CongNoAdapter.ThingViewH
         CongNo congNo = congNos.get(position);
         holder.tvTenMHHP.setText(congNo.getTenMHHP());
         holder.tvSTC.setText(String.valueOf(congNo.getSoTinChi()));
-        holder.tvNam.setText(congNo.getNam());
-        holder.tvHocKy.setText(String.valueOf(congNo.getHocKy()));
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         holder.tvTienCN.setText(formatter.format(790000* congNo.getSoTinChi())+ " VNĐ");
     }
@@ -61,14 +59,11 @@ public class CongNoAdapter extends RecyclerView.Adapter<CongNoAdapter.ThingViewH
     }
 
     public class ThingViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTenMHHP, tvSTC, tvNam, tvHocKy, tvTienCN, tvTong;
+        TextView tvTenMHHP, tvSTC, tvTienCN;
 
         public ThingViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tvTenMHHP = itemView.findViewById(R.id.tv_tenMHHPCN);
-            tvHocKy = itemView.findViewById(R.id.tv_HocKyCN);
-            tvNam = itemView.findViewById(R.id.tv_NamCN);
             tvSTC = itemView.findViewById(R.id.tv_SoTCCN);
             tvTienCN = itemView.findViewById(R.id.tv_TienCN);
         }

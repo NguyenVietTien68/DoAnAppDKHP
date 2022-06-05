@@ -1,7 +1,5 @@
 package com.example.doanappdkhp.gui;
 
-import static com.example.doanappdkhp.MainActivity.mssv;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doanappdkhp.LoginActivity;
 import com.example.doanappdkhp.R;
 import com.example.doanappdkhp.adapter.LichHocAdapter;
 import com.example.doanappdkhp.api.ApiService;
+import com.example.doanappdkhp.data_local.DataLocalManager;
 import com.example.doanappdkhp.entity.LichHoc;
+import com.example.doanappdkhp.fragment.MainForm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class xem_lich extends AppCompatActivity {
-    String[] nam = {"2021-2022", "2022-2023", "2023-2024", "2024-2025"};
+//    String[] nam = {"2021-2022", "2022-2023", "2023-2024", "2024-2025"};
     String[] hocky = {"1","2","3"};
     Spinner nam_spinner, hocky_spinner;
-    TextView txtTest;
     Button btnGet;
 
     private static final String TAG = "MainActivity";
@@ -61,7 +60,7 @@ public class xem_lich extends AppCompatActivity {
 //        txtTest = findViewById(R.id.txtText);
 
 
-        ArrayAdapter adapternam = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, nam);
+        ArrayAdapter adapternam = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, MainForm.listNam);
         adapternam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         nam_spinner.setAdapter(adapternam);
 
@@ -81,7 +80,7 @@ public class xem_lich extends AppCompatActivity {
     }
 
     private void getLichHoc() {
-        ApiService.apiService.getLichHoc(Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString(),mssv).enqueue(new Callback<List<LichHoc>>() {
+        ApiService.apiService.getLichHoc(Integer.parseInt(hocky_spinner.getSelectedItem().toString()), nam_spinner.getSelectedItem().toString(), DataLocalManager.getMSSV()).enqueue(new Callback<List<LichHoc>>() {
 
             @Override
             public void onResponse(Call<List<LichHoc>> call, Response<List<LichHoc>> response) {

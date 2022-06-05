@@ -7,6 +7,8 @@ import com.example.doanappdkhp.entity.DeleteLHPDDK;
 import com.example.doanappdkhp.entity.KiemTraLichHoc;
 import com.example.doanappdkhp.entity.LHPDaDangKy;
 import com.example.doanappdkhp.entity.LopHocPhanTH;
+import com.example.doanappdkhp.entity.MatKhau;
+import com.example.doanappdkhp.entity.MonHoc;
 import com.example.doanappdkhp.entity.MonTienQuyet;
 import com.example.doanappdkhp.entity.NamHoc;
 import com.example.doanappdkhp.entity.SLDaDangKy;
@@ -28,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -40,6 +43,7 @@ public interface ApiService {
 
     ApiService apiService = new Retrofit.Builder()
             .baseUrl("https://dkhpiuh.herokuapp.com/test/")
+//            .baseUrl("172.24.32.1:3000/test/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -51,19 +55,34 @@ public interface ApiService {
     Call<List<Sinhvien>> convertSinhVien();
 
     @GET("sinhvien/{mssv}")
-    Call<List<Sinhvien>> getSinhVienTheoMSSV(@Path("mssv") String groupId);
+    Call<List<Sinhvien>> getSinhVienTheoMSSV(@Path("mssv") String mssv);
 
     @GET("namhoc")
     Call<List<NamHoc>> getNamHocs();
 
-    @GET("laydiem/{mssv}")
-    Call<List<Diem>> getDiemTheoMSSV(@Path("mssv") String gruopId);
+    @GET("laydiem/{mssv}/{nam}/{hocky}")
+    Call<List<Diem>> getDiemTheoMSSV(@Path("mssv") String mssv,
+                                     @Path("nam") String nam,
+                                     @Path("hocky") int hocky);
 
-    @GET("layctkhung/{mssv}")
-    Call<List<CTKhung>> getCTKhungTheoMSSV(@Path("mssv") String groupId);
+    @GET("laymonlt/{mssv}/{nam}/{hocky}")
+    Call<List<MonHoc>> getMonLyThuyet(@Path("mssv") String mssv,
+                                      @Path("nam") String nam,
+                                      @Path("hocky") int hocky);
 
-    @GET("laycongno/{mssv}")
-    Call<List<CongNo>> getCongNoTheoMSSV(@Path("mssv") String groupId);
+    @GET("laymonth/{mssv}/{nam}/{hocky}")
+    Call<List<MonHoc>> getMonThucHanh(@Path("mssv") String mssv,
+                                      @Path("nam") String nam,
+                                      @Path("hocky") int hocky);
+
+    @GET("layctkhung/{mssv}/{hocky}")
+    Call<List<CTKhung>> getCTKhungTheo(@Path("mssv") String mssv,
+                                           @Path("hocky") int hocky);
+
+    @GET("laycongno/{mssv}/{nam}/{hocky}")
+    Call<List<CongNo>> getCongNoTheoMSSV(@Path("mssv") String mssv,
+                                         @Path("nam") String nam,
+                                         @Path("hocky") int hocky);
 
     @GET("laylichhoc/{HocKy}/{Nam}/{MSSV}")
     Call<List<LichHoc>> getLichHoc(@Path("HocKy") int hocky,
@@ -76,16 +95,16 @@ public interface ApiService {
                                       @Path("nam") String nam);
 
     @GET("laylhp/{malhp}")
-    Call<List<LopHocPhan>> getLopHocPhan(@Path("malhp") String groupId);
+    Call<List<LopHocPhan>> getLopHocPhan(@Path("malhp") String mssv);
 
     @GET("laydslhp/{mamhp}")
-    Call<List<LopHocPhan>> getDSLopHocPhan(@Path("mamhp") String groupId);
+    Call<List<LopHocPhan>> getDSLopHocPhan(@Path("mamhp") String mssv);
 
     @GET("laydslhplt/{malhp}")
-    Call<List<LopHocPhanLT>> getDSLopHocPhanLT(@Path("malhp") String groupId);
+    Call<List<LopHocPhanLT>> getDSLopHocPhanLT(@Path("malhp") String mssv);
 
     @GET("laydslhpth/{malhp}")
-    Call<List<LopHocPhanTH>> getDSLopHocPhanTH(@Path("malhp") String groupId);
+    Call<List<LopHocPhanTH>> getDSLopHocPhanTH(@Path("malhp") String mssv);
 
     @GET("laydslhpddk/{mssv}/{hocky}/{nam}")
     Call<List<LHPDaDangKy>> getDSLopHocPhanDDK(@Path("mssv") String mssv,
@@ -119,7 +138,9 @@ public interface ApiService {
                                                       @Path("nam") String nam,
                                                       @Path("malhp") String malhp,
                                                       @Path("nhom") String nhom);
-
+    @PUT("matkhau")
+    Call<MatKhau> updatMatKhau(@Query("MaTaiKhoan") String mtk,
+                         @Query("Pass") String pass);
 //    @POST("dkhp")
 //    Call<List<DKHPSV>> dkhp(@Body DKHPSV dkhpsv);
 //    @POST("loginsv")

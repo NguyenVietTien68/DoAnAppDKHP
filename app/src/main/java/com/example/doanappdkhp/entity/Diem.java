@@ -1,31 +1,12 @@
 package com.example.doanappdkhp.entity;
 
 public class Diem {
-    String Nam;
-    int hocky;
     String TenMHHP;
     int SoTinChi;
     float DiemTK;
     float DiemGK;
     float DiemTH;
     float DiemCK;
-
-
-    public String getNam() {
-        return Nam;
-    }
-
-    public void setNam(String nam) {
-        Nam = nam;
-    }
-
-    public int getHocky() {
-        return hocky;
-    }
-
-    public void setHocky(int hocky) {
-        this.hocky = hocky;
-    }
 
     public String getTenMHHP() {
         return TenMHHP;
@@ -75,18 +56,4 @@ public class Diem {
         DiemCK = diemCK;
     }
 
-
-    @Override
-    public String toString() {
-        return "Diem{" +
-                "Nam='" + Nam + '\'' +
-                ", hocky=" + hocky +
-                ", TenMHHP='" + TenMHHP + '\'' +
-                ", SoTinChi=" + SoTinChi +
-                ", DiemTK=" + DiemTK +
-                ", DiemGK=" + DiemGK +
-                ", DiemTH=" + DiemTH +
-                ", DiemCK=" + DiemCK +
-                '}';
-    }
 }

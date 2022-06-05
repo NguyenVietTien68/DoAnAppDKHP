@@ -58,28 +58,20 @@ public class LopHocPhanAdapter extends RecyclerView.Adapter<LopHocPhanAdapter.Th
         holder.tvMaLopHP.setText(lopHocPhan.getMaLopHP());
         holder.tvSiSo.setText(String.valueOf(lopHocPhan.getSiSo()));
         holder.tvSLDaDangKy.setText(String.valueOf(lopHocPhan.getDaDangKy()));
+
+        // 0.666666667 = 2/3
         if(lopHocPhan.getDaDangKy() < (0.666666667 * lopHocPhan.getSiSo())){
             holder.tvTinhTrang.setText("Chờ đăng ký");
         }else{
             holder.tvTinhTrang.setText("Chấp nhận mở lớp");
         }
-        //holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(position = color));
-
         holder.btnChonMaLHP.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
                 //color = holder.getAdapterPosition();
                 iClickItemLHP.onClickItemLHP(lopHocPhan);
-                //holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                 notifyDataSetChanged();
-
-                //selectedPosition = holder.getAdapterPosition();
-//                if (color == color){
-//                    holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
-//                }else{
-//                    holder.btnChonMaLHP.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
-//                }
 
             }
         });

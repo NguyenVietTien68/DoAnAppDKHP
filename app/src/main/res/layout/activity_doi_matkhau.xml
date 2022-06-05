@@ -7,7 +7,7 @@
     tools:context=".gui.doi_matkhau">
 
     <EditText
-        android:id="@+id/editTextMatKhauMoiLai"
+        android:id="@+id/edtPassNew2"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -15,14 +15,14 @@
         android:hint="Nhập lại mật khẩu mới"
         android:inputType="textPassword"
         android:textColor="#000000"
-        android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauMoi"
+        android:textColorHint="#AA9F9F"
+        app:layout_constraintEnd_toEndOf="@+id/edtPassNew"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauMoi"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauMoi" />
+        app:layout_constraintStart_toStartOf="@+id/edtPassNew"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassNew" />
 
     <EditText
-        android:id="@+id/editTextMatKhauMoi"
+        android:id="@+id/edtPassNew"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -30,17 +30,17 @@
         android:hint="Mật khẩu mới"
         android:inputType="textPassword"
         android:textColor="#000000"
-        android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauCu"
+        android:textColorHint="#AA9F9F"
+        app:layout_constraintEnd_toEndOf="@+id/edtPassCu"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauCu"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauCu" />
+        app:layout_constraintStart_toStartOf="@+id/edtPassCu"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassCu" />
 
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#DA0380B8"
+        android:background="#56c222"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="@+id/view6" />
 
     <EditText
-        android:id="@+id/editTextMatKhauCu"
+        android:id="@+id/edtPassCu"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="116dp"
@@ -68,7 +68,7 @@
         android:hint="Mật khẩu cũ"
         android:inputType="textPassword"
         android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColorHint="#AA9F9F"
         app:layout_constraintEnd_toEndOf="@+id/view6"
         app:layout_constraintStart_toStartOf="@+id/view6"
         app:layout_constraintTop_toBottomOf="@+id/view6" />
@@ -81,11 +81,11 @@
         android:text="đổi mật khẩu"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFEB3B"
-        app:backgroundTint="#DA0380B8"
-        app:layout_constraintEnd_toEndOf="@+id/editTextMatKhauMoiLai"
+        app:backgroundTint="#56c222"
+        app:layout_constraintEnd_toEndOf="@+id/edtPassNew2"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/editTextMatKhauMoiLai"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMatKhauMoiLai" />
+        app:layout_constraintStart_toStartOf="@+id/edtPassNew2"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassNew2" />
 
     <TextView
         android:id="@+id/txtBaoLoiDoiMK"

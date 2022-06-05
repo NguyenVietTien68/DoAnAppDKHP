@@ -1,141 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MainForm">
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_alignEnd="@+id/textView11"
-        android:layout_alignBottom="@+id/imgSinhVien"
-        android:layout_marginStart="-3dp"
-        android:layout_marginEnd="-20dp"
-        android:layout_marginBottom="-352dp"
-        android:text="Khoá học: "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtDiaChi"
-        android:layout_width="204dp"
-        android:layout_height="95dp"
-        android:layout_alignTop="@+id/textView11"
-        android:layout_alignBottom="@+id/textView11"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="-73dp"
-        android:layout_toEndOf="@+id/textView"
-        android:text="null"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtGioiTinh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_toEndOf="@+id/textView"
-        android:text="null"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtNgaySinh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="-4dp"
-        android:layout_toEndOf="@+id/textView"
-        android:text="null"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtSoDT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView9"
-        android:layout_alignBottom="@+id/textView9"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="-4dp"
-        android:layout_toEndOf="@+id/textView"
-        android:text="null"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtKhoaHoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView13"
-        android:layout_alignBottom="@+id/textView13"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="-3dp"
-        android:layout_toEndOf="@+id/textView"
-        android:text="null"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_alignBottom="@+id/imgSinhVien"
-        android:layout_marginStart="-1dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="-246dp"
-        android:text="Địa chỉ: "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_alignBottom="@+id/imgSinhVien"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="-186dp"
-        android:text="Điện thoại: "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView"
-        android:layout_alignBottom="@+id/imgSinhVien"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="-131dp"
-        android:text="Ngày sinh: "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
 
     <View
         android:id="@+id/view2"
@@ -144,55 +13,203 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
         android:alpha="0.8"
-        android:background="@color/blue" />
+        android:background="#0165b9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_alignEnd="@+id/textView11"
+        android:layout_alignBottom="@+id/imgSinhVien"
+        android:layout_marginTop="30dp"
+        android:text="Khoá học: "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/txtDiaChi" />
+
+    <TextView
+        android:id="@+id/txtDiaChi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="null"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/txtGioiTinh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="null"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtNgaySinh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="null"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/txtSoDT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView9"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="null"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/txtKhoaHoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView13"
+        android:layout_alignBottom="@+id/textView13"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="null"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_alignEnd="@+id/textView9"
+        android:layout_alignBottom="@+id/imgSinhVien"
+        android:layout_marginTop="30dp"
+        android:text="Địa chỉ: "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_alignBottom="@+id/imgSinhVien"
+        android:layout_marginTop="30dp"
+        android:text="Điện thoại: "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignBottom="@+id/imgSinhVien"
+        android:layout_marginTop="30dp"
+        android:text="Ngày sinh: "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgSinhVien"
-        android:layout_width="162dp"
-        android:layout_height="162dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_alignBottom="@+id/view2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="119dp"
-        android:layout_marginEnd="121dp"
-        android:layout_marginBottom="-82dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtIdInfo"
         app:riv_corner_radius="200dp"
         tools:src="@drawable/anh" />
 
     <TextView
         android:id="@+id/txtNameInfo"
-        android:layout_width="312dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/txtIdInfo"
         android:layout_alignEnd="@+id/txtIdInfo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="-87dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="-87dp"
+        android:layout_marginTop="16dp"
         android:text="Null"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
         android:id="@+id/txtIdInfo"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/imgSinhVien"
         android:layout_alignStart="@+id/imgSinhVien"
         android:layout_alignEnd="@+id/imgSinhVien"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="10dp"
 
+        android:layout_marginTop="8dp"
         android:text="Null"
         android:textAlignment="center"
         android:textColor="#FBF2F2"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameInfo" />
 
     <TextView
         android:id="@+id/textView"
@@ -200,12 +217,14 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/imgSinhVien"
         android:layout_alignBottom="@+id/imgSinhVien"
-        android:layout_marginStart="-87dp"
-        android:layout_marginBottom="-75dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
         android:text="Giới tính: "
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSinhVien" />
 
     <ProgressBar
         android:id="@+id/progressBarInfoSV"
@@ -215,8 +234,23 @@
         android:layout_alignBottom="@+id/imgSinhVien"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="181dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="-52dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSinhVien" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnDangXuat"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:text="Đăng xuất"
+        app:backgroundTint="#0165b9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
