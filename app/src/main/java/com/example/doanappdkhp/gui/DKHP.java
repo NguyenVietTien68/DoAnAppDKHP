@@ -127,6 +127,18 @@ public class DKHP extends AppCompatActivity {
          monthCheck = Integer.parseInt(monthfomat);
         namFomat = formatterNam.format(dateToday);
         namCheck = Integer.parseInt(namFomat);
+        if(monthCheck <= 5){
+            hockyCheck = "2";
+            namCheck = namCheck-1;
+        }
+        else if (monthCheck >5 && monthCheck < 8){
+            hockyCheck = "3";
+            namCheck = namCheck-1;
+        }
+        else if (monthCheck >7 && monthCheck < 13){
+            hockyCheck = "1";
+            namCheck = namCheck;
+        }
 
 //-------------------Đăng kí học phần cho sinh viên-------------------------//
         btnDKHP = findViewById(R.id.btnDKHP);
@@ -143,8 +155,9 @@ public class DKHP extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String namClick = parent.getItemAtPosition(position).toString();
                 DataLocalManager.setNam(namClick);
-                Log.d("Nam:---------",DataLocalManager.getNam().substring(0,4)+"");
+                Log.d("Namcclickat:---------",DataLocalManager.getNam().substring(0,4)+"");
                 clickDKHPP(DataLocalManager.getHocKy(), DataLocalManager.getNam().substring(0,4));
+
             }
 
             @Override
@@ -164,6 +177,7 @@ public class DKHP extends AppCompatActivity {
                 DataLocalManager.setHocKy(hockyClick);
                 Log.d("HocKy:---------",DataLocalManager.getHocKy()+"");
                 clickDKHPP(DataLocalManager.getHocKy(), DataLocalManager.getNam().substring(0,4));
+
             }
 
             @Override
@@ -382,6 +396,7 @@ public class DKHP extends AppCompatActivity {
         adtLHPDDK.notifyDataSetChanged();
     }
 //----------Xử lý phần đăng ký học phần-------------------------------------------------------------//
+
     private void clickDKHPP(String hockyClick, String namClick) {
         btnDKHP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -389,19 +404,8 @@ public class DKHP extends AppCompatActivity {
                 rcvMHP.post(new Runnable() {
                     @Override
                     public void run() {
-                        namCheck = namCheck;
-                        if(monthCheck <= 5){
-                            hockyCheck = "2";
-                            namCheck -=1;
-                        }
-                        else if (monthCheck >5 && monthCheck < 8){
-                            hockyCheck = "3";
-                            namCheck = namCheck+1;
-                        }
-                        else if (monthCheck >7 && monthCheck < 13){
-                            hockyCheck = "1";
-                            namCheck = namCheck;
-                        }
+
+                        Log.d("namcheck:", +namCheck+"");
                             if (Integer.parseInt(namClick) != namCheck || hockyClick != hockyCheck){
                                 Toast.makeText(DKHP.this, "không đúng thời gian đăng ký", Toast.LENGTH_SHORT).show();
                             }else {
@@ -461,7 +465,7 @@ public class DKHP extends AppCompatActivity {
                     if (monHocPhanList != null) {
                         adtMHP.setMonHocPhans((ArrayList<MonHocPhan>) monHocPhanList);
                         progressBarMHP.setVisibility(View.GONE);
-                        lopHocPhanList.clear();
+//                        lopHocPhanList.clear();
                         lopHocPhanLTList.clear();
                         lopHocPhanTHList.clear();
 
@@ -499,7 +503,7 @@ public class DKHP extends AppCompatActivity {
     }
 //---------------Lấy danh sách lớp học phần-----------------------------------------------//
     public void getDSLopHocPhan() {
-        ApiService.apiService.getDSLopHocPhan(mhp).enqueue(new Callback<List<LopHocPhan>>() {
+        ApiService.apiService.getDSLopHocPhan(mhp, nam_spinner.getSelectedItem().toString(), Integer.parseInt(hocky_spinner.getSelectedItem().toString())).enqueue(new Callback<List<LopHocPhan>>() {
             @Override
             public void onResponse(Call<List<LopHocPhan>> call, Response<List<LopHocPhan>> response) {
                 //Toast.makeText(DKHP.this, "LopHocPhan "+ response.body().size(), Toast.LENGTH_SHORT).show();
@@ -655,6 +659,8 @@ public class DKHP extends AppCompatActivity {
 //                overridePendingTransition(0, 0);
 //                startActivity(getIntent());
 //                overridePendingTransition(0, 0);
+                lopHocPhanTHList.clear();
+                lopHocPhanLTList.clear();
                 getDSMonHocPhan();
                 getDSLopHocPhanDDK();
             }
@@ -675,6 +681,8 @@ public class DKHP extends AppCompatActivity {
 //                overridePendingTransition(0, 0);
 //                startActivity(getIntent());
 //                overridePendingTransition(0, 0);
+                lopHocPhanTHList.clear();
+                lopHocPhanLTList.clear();
                 getDSMonHocPhan();
                 getDSLopHocPhanDDK();
             }
