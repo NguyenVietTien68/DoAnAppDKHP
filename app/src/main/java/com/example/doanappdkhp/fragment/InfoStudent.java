@@ -134,10 +134,11 @@ public class InfoStudent extends Fragment {
                         txtDiaChi.setText(sinhvien.getDiaChi());
                         txtKhoaHoc.setText(sinhvien.getKhoaHoc());
                         khoahocchung = sinhvien.getKhoaHoc();
-
                         Log.d("Khoa hocccccccc", khoahocchung);
-                        Glide.with(InfoStudent.this).load(sinhvien.getImageSV()).into(imgSV);
+                        String imgeSV = sinhvien.getImageSV();
+                        Glide.with(InfoStudent.this).load(imgeSV).into(imgSV);
                         progressBar.setVisibility(View.GONE);
+
                     }
 
                     }catch (Exception e){

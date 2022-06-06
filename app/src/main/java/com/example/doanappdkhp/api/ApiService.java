@@ -97,8 +97,10 @@ public interface ApiService {
     @GET("laylhp/{malhp}")
     Call<List<LopHocPhan>> getLopHocPhan(@Path("malhp") String mssv);
 
-    @GET("laydslhp/{mamhp}")
-    Call<List<LopHocPhan>> getDSLopHocPhan(@Path("mamhp") String mssv);
+    @GET("laydslhp/{mamhp}/{nam}/{hocky}")
+    Call<List<LopHocPhan>> getDSLopHocPhan(@Path("mamhp") String mssv,
+                                           @Path("nam") String nam,
+                                           @Path("hocky") int hocky);
 
     @GET("laydslhplt/{malhp}")
     Call<List<LopHocPhanLT>> getDSLopHocPhanLT(@Path("malhp") String mssv);
